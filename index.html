@@ -84,14 +84,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .hero h1 {
@@ -108,7 +102,6 @@
             font-weight: 300;
             margin-bottom: 2rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
         }
 
         .hero-stats {
@@ -117,12 +110,9 @@
             justify-content: center;
             flex-wrap: wrap;
             margin-top: 3rem;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
         }
 
-        .stat-item {
-            text-align: center;
-        }
+        .stat-item { text-align: center; }
 
         .stat-number {
             font-family: 'Playfair Display', serif;
@@ -177,9 +167,7 @@
             transition: transform 0.3s ease;
         }
 
-        nav.visible {
-            transform: translateY(0);
-        }
+        nav.visible { transform: translateY(0); }
 
         nav .container {
             max-width: 1200px;
@@ -212,9 +200,7 @@
             transition: color 0.3s;
         }
 
-        nav a:hover {
-            color: var(--gold);
-        }
+        nav a:hover { color: var(--gold); }
 
         /* Container */
         .container {
@@ -224,9 +210,7 @@
         }
 
         /* Section */
-        section {
-            padding: 8rem 0;
-        }
+        section { padding: 8rem 0; }
 
         .section-title {
             font-family: 'Playfair Display', serif;
@@ -247,10 +231,7 @@
         }
 
         /* Case Studies */
-        .case-studies {
-            display: grid;
-            gap: 6rem;
-        }
+        .case-studies { display: grid; gap: 6rem; }
 
         .case-study {
             background: white;
@@ -273,17 +254,6 @@
             overflow: hidden;
         }
 
-        .case-study-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
         .case-study-number {
             font-family: 'Playfair Display', serif;
             font-size: 1rem;
@@ -302,12 +272,6 @@
             line-height: 1.2;
         }
 
-        .case-study-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
         .case-study-image {
             width: 100%;
             height: auto;
@@ -315,9 +279,7 @@
             border-bottom: 4px solid var(--accent);
         }
 
-        .case-study-content {
-            padding: 3rem;
-        }
+        .case-study-content { padding: 3rem; }
 
         .metrics-grid {
             display: grid;
@@ -331,11 +293,6 @@
             padding: 2rem;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-left: 4px solid var(--accent);
-            transition: transform 0.3s ease;
-        }
-
-        .metric:hover {
-            transform: scale(1.05);
         }
 
         .metric-value {
@@ -344,50 +301,15 @@
             font-weight: 900;
             color: var(--accent);
             display: block;
-            margin-bottom: 0.5rem;
         }
 
-        .metric-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 500;
-        }
-
-        .challenge, .solution, .impact {
-            margin-bottom: 2rem;
-        }
-
-        .challenge h4, .solution h4, .impact h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--secondary);
-        }
-
-        .challenge p, .solution p, .impact p {
-            color: var(--gray);
-            line-height: 1.8;
-        }
-
-        .tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 2rem;
-        }
-
+        .tags { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 2rem; }
         .tag {
             padding: 0.5rem 1.2rem;
             background: var(--primary);
             color: white;
             border-radius: 50px;
             font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         /* Gallery Grid */
@@ -398,22 +320,12 @@
             margin: 3rem 0;
         }
 
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-
         .gallery-item img {
             width: 100%;
             height: auto;
             display: block;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
 
         /* Skills */
@@ -421,43 +333,13 @@
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 3rem;
         }
 
         .skill-category {
             background: white;
             padding: 2.5rem;
-            border-radius: 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
             border-top: 4px solid var(--accent);
-            transition: transform 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-        }
-
-        .skill-category h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-
-        .skill-category ul {
-            list-style: none;
-        }
-
-        .skill-category li {
-            padding: 0.6rem 0;
-            border-bottom: 1px solid #e9ecef;
-            color: var(--gray);
-            font-weight: 500;
-        }
-
-        .skill-category li:last-child {
-            border-bottom: none;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
         }
 
         /* Contact */
@@ -467,47 +349,16 @@
             text-align: center;
         }
 
-        .contact .section-title {
-            color: white;
-        }
-
-        .contact .section-title::after {
-            background: var(--gold);
-        }
-
         .contact-info {
             display: flex;
             justify-content: center;
             gap: 3rem;
             flex-wrap: wrap;
             margin-top: 3rem;
-            font-size: 1.2rem;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .contact-item a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .contact-item a:hover {
-            color: var(--gold);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
+        .contact-item a { color: white; text-decoration: none; font-weight: 700; }
+        .contact-item a:hover { color: var(--gold); }
 
         .cta-button {
             display: inline-block;
@@ -516,61 +367,14 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-radius: 0;
-            transition: all 0.3s ease;
-            font-size: 1rem;
+            margin-top: 2rem;
         }
 
-        .cta-button:hover {
-            background: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
+        footer { background: var(--primary); color: white; text-align: center; padding: 2rem; font-size: 0.9rem; }
 
-        .cta-button.secondary {
-            background: transparent;
-            border: 2px solid var(--gold);
-            color: var(--gold);
-        }
-
-        .cta-button.secondary:hover {
-            background: var(--gold);
-            color: var(--primary);
-        }
-
-        /* Footer */
-        footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
-            padding: 2rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-
-            .hero-stats {
-                gap: 1.5rem;
-            }
-
-            .metrics-grid {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 4rem 0;
-            }
-
-            .case-study h3 {
-                font-size: 2rem;
-            }
+            nav ul { display: none; }
+            section { padding: 4rem 0; }
         }
     </style>
 </head>
@@ -609,20 +413,13 @@
                 </div>
             </div>
         </div>
-        <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24">
-                <polyline points="7 13 12 18 17 13"></polyline>
-                <polyline points="7 6 12 11 17 6"></polyline>
-            </svg>
-        </div>
     </section>
 
     <section id="about">
         <div class="container">
             <h2 class="section-title">Chi Sono</h2>
-            <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.2rem; line-height: 1.8; color: var(--gray);">
-                <p>Product Manager con 3+ anni di esperienza nella gestione end-to-end di prodotti digitali per il settore media ed editoriale. Appassionata di innovazione digitale, trasformo dati in decisioni strategiche e idee in prodotti scalabili.</p>
-                <p style="margin-top: 1.5rem;">Il mio approccio combina visione strategica, competenze tecniche e focus sull'impatto misurabile: ogni progetto che gestisco parte da un'analisi approfondita e porta a risultati concreti.</p>
+            <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.2rem; color: var(--gray);">
+                <p>Product Manager con 3+ anni di esperienza nella gestione end-to-end di prodotti digitali per il settore media ed editoriale. Trasformo dati in decisioni strategiche e idee in prodotti scalabili.</p>
             </div>
         </div>
     </section>
@@ -632,224 +429,70 @@
             <h2 class="section-title">I Miei Progetti</h2>
             
             <div class="case-studies">
-                <!-- Case Study 1: Newsletter -->
                 <div class="case-study">
                     <div class="case-study-header">
                         <div class="case-study-number">Progetto 01</div>
                         <h3>Newsletter Restyling & Optimization</h3>
-                        <p class="case-study-subtitle">Incremento delle performance del 6.5% in 3 mesi</p>
                     </div>
-                    <img src="QN-NL-Buongiorno-300x250-2__1_.png" alt="Newsletter Quotidiano Nazionale" class="case-study-image">
+                    <img src="newsletter.png" alt="Newsletter Restyling" class="case-study-image">
                     <div class="case-study-content">
                         <div class="metrics-grid">
-                            <div class="metric">
-                                <span class="metric-value">1.3M+</span>
-                                <span class="metric-label">Iscritti Totali</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">49%</span>
-                                <span class="metric-label">Open Rate</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">20%</span>
-                                <span class="metric-label">CTR Medio</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">+6.5%</span>
-                                <span class="metric-label">Crescita OR</span>
-                            </div>
+                            <div class="metric"><span class="metric-value">1.3M+</span><span class="metric-label">Iscritti</span></div>
+                            <div class="metric"><span class="metric-value">+6.5%</span><span class="metric-label">Crescita OR</span></div>
                         </div>
-
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Gestione quotidiana di 57 newsletter editoriali + 7 DEM mensili con performance stagnanti. Open rate medio del 46%, inferiore ai benchmark di settore. Template datati e processo di creazione non ottimizzato.</p>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p>Restyling completo del sistema newsletter: redesign dei template con coding autonomo in HTML/CSS, ottimizzazione UX mobile-first, segmentazione audience migliorata, e implementazione di A/B testing sistematico. Automazione del workflow di produzione tramite Piano ESP con reportistica KPI settimanale.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>In soli 3 mesi: incremento dell'open rate dal 46% al 49% (+6.5%), CTR medio stabile al 20%, riduzione del 30% del tempo di produzione, e framework scalabile replicato su tutte le 57 edizioni quotidiane.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">Email Marketing</span>
-                            <span class="tag">HTML/CSS</span>
-                            <span class="tag">Piano ESP</span>
-                            <span class="tag">A/B Testing</span>
-                            <span class="tag">Analytics</span>
-                        </div>
+                        <p>Ottimizzazione UX e restyling dei template per 57 edizioni locali.</p>
+                        <div class="tags"><span class="tag">Email Marketing</span><span class="tag">HTML/CSS</span></div>
                     </div>
                 </div>
 
-                <!-- Case Study 2: Oroscopo -->
                 <div class="case-study">
                     <div class="case-study-header">
                         <div class="case-study-number">Progetto 02</div>
-                        <h3>Progetto Oroscopo: Da Zero a 26K Pageviews/Mese</h3>
-                        <p class="case-study-subtitle">Ideazione e sviluppo completo di una nuova sezione editoriale</p>
+                        <h3>Progetto Oroscopo</h3>
                     </div>
-                    <img src="screencapture-quotidiano-net-oroscopo-2026-02-10-10_24_06.png" alt="Sezione Oroscopo QN" class="case-study-image">
+                    <img src="oroscopo.png" alt="Sezione Oroscopo" class="case-study-image">
                     <div class="case-study-content">
                         <div class="metrics-grid">
-                            <div class="metric">
-                                <span class="metric-value">26K</span>
-                                <span class="metric-label">Pageviews/Mese</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">58%</span>
-                                <span class="metric-label">Click Ratio</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">18%</span>
-                                <span class="metric-label">Scroll Depth</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">13s</span>
-                                <span class="metric-label">View Time Medio</span>
-                            </div>
+                            <div class="metric"><span class="metric-value">26K</span><span class="metric-label">PV/Mese</span></div>
                         </div>
-
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Sezione oroscopo esistente praticamente inattiva con performance quasi nulle. Necessità di creare un prodotto editoriale attraente che generasse traffico costante e engagement significativo, partendo da zero sia lato strategia che implementazione tecnica.</p>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p>Gestione end-to-end del progetto: analisi di mercato e benchmark competitivo, definizione strategia contenuti e flusso utente, design UX/UI con formato articolo custom giornaliero, creazione componenti dedicati su CMS DMDesk, e implementazione sistema di aggiornamento quotidiano automatizzato.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>Risultati in 12 mesi: 26.169 pageviews mensili da sezione precedentemente inattiva, click ratio del 58% (audience altamente engaged), 18% scroll depth con 13s di view time medio. Il progetto è diventato case study interno per lo sviluppo di nuove sezioni verticali.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">Product Strategy</span>
-                            <span class="tag">UX Design</span>
-                            <span class="tag">CMS Development</span>
-                            <span class="tag">DMDesk</span>
-                            <span class="tag">Content Strategy</span>
-                        </div>
+                        <p>Ideazione e sviluppo della sezione verticale oroscopo su CMS proprietario.</p>
+                        <div class="tags"><span class="tag">Product Strategy</span><span class="tag">UX Design</span></div>
                     </div>
                 </div>
 
-                <!-- Case Study 3: 140 Anni Carlino -->
                 <div class="case-study">
                     <div class="case-study-header">
                         <div class="case-study-number">Progetto 03</div>
                         <h3>140 Anni del Resto del Carlino</h3>
-                        <p class="case-study-subtitle">Landing page celebrativa con eventi e timeline interattiva</p>
                     </div>
-                    <img src="screencapture-140anni-ilrestodelcarlino-it-2026-02-10-10_26_01.png" alt="Landing Page 140 Anni Carlino" class="case-study-image">
+                    <img src="140anni.png" alt="Landing Page 140 Anni" class="case-study-image">
                     <div class="case-study-content">
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Creare una landing page istituzionale per celebrare i 140 anni de Il Resto del Carlino, il giornale più antico d'Italia. Necessità di raccontare la storia in modo coinvolgente, integrare eventi sul territorio, e gestire partnership con enti e aziende locali.</p>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p>Progettazione e sviluppo di landing page WordPress con timeline storica interattiva, sezione eventi con filtri geografici, gallery fotografica d'archivio, area partner con loghi istituzionali. Design responsive che combina elementi storici (prime pagine d'epoca) con estetica moderna.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>Hub digitale centrale per tutte le celebrazioni del 140° anniversario. Coordinamento di eventi in 15+ città (Bologna, Ancona, Rimini, Ferrara...), vetrina per 50+ partner istituzionali e aziendali. Punto di riferimento per contenuti speciali e magazine dedicati.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">WordPress</span>
-                            <span class="tag">Event Management</span>
-                            <span class="tag">Brand Heritage</span>
-                            <span class="tag">UX/UI Design</span>
-                            <span class="tag">Partnership</span>
-                        </div>
+                        <p>Sviluppo landing page celebrativa con timeline storica e gestione eventi.</p>
+                        <div class="tags"><span class="tag">WordPress</span><span class="tag">Brand Heritage</span></div>
                     </div>
                 </div>
 
-                <!-- Case Study 4: Centro Notifiche -->
                 <div class="case-study">
                     <div class="case-study-header">
                         <div class="case-study-number">Progetto 04</div>
-                        <h3>Centro Notifiche Push Personalizzato</h3>
-                        <p class="case-study-subtitle">Sistema di notifiche multi-argomento per 4 testate nazionali</p>
+                        <h3>Centro Notifiche Push</h3>
                     </div>
-                    <img src="screencapture-quotidiano-net-centro-notifiche-2026-02-10-10_23_52.png" alt="Centro Notifiche QN" class="case-study-image">
+                    <img src="notifiche.png" alt="Centro Notifiche" class="case-study-image">
                     <div class="case-study-content">
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Implementare sistema di notifiche push personalizzato per Quotidiano Nazionale e le sue 4 edizioni locali (Carlino, Il Giorno, La Nazione). Necessità di permettere agli utenti di scegliere argomenti di interesse evitando notification fatigue.</p>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p>Sviluppo di Centro Notifiche dedicato con categorizzazione per argomento (Cronaca, Sport, Economia, Esteri, Magazine, Politica, ecc.) e per edizione locale. UX intuitiva con toggle on/off immediati. Integrazione tecnica con sistema di push notification esistente e tracking analytics.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>Lancio feature innovativa nel panorama editoriale italiano. Maggiore engagement utenti grazie a personalizzazione granulare. Riduzione unsubscribe rate dalle notifiche. Sistema replicato poi su altre testate del gruppo Monrif.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">Push Notifications</span>
-                            <span class="tag">User Preference</span>
-                            <span class="tag">Product Innovation</span>
-                            <span class="tag">Multi-brand</span>
-                            <span class="tag">Analytics</span>
-                        </div>
+                        <p>Sistema di personalizzazione notifiche per argomenti e città.</p>
+                        <div class="tags"><span class="tag">Product Innovation</span><span class="tag">Mobile UX</span></div>
                     </div>
                 </div>
 
-                <!-- Case Study 5: Altri Progetti -->
                 <div class="case-study">
                     <div class="case-study-header">
-                        <div class="case-study-number">Portfolio</div>
-                        <h3>Altri Progetti & Iniziative</h3>
-                        <p class="case-study-subtitle">Eventi, verticali editoriali e iniziative speciali</p>
+                        <div class="case-study-number">Extra</div>
+                        <h3>Iniziative Speciali</h3>
                     </div>
                     <div class="case-study-content">
                         <div class="gallery-grid">
-                            <div class="gallery-item">
-                                <img src="screencapture-quotidiano-net-eventi-2026-02-10-10_26_40.png" alt="Portale Eventi QN">
-                            </div>
-                            <div class="gallery-item">
-                                <img src="screencapture-topaziende-quotidiano-net-2026-02-10-10_25_49.png" alt="Top Aziende - Verticale B2B">
-                            </div>
-                        </div>
-
-                        <div style="margin-top: 3rem;">
-                            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--secondary);">Highlights Portfolio</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; color: var(--gray);">
-                                    <strong style="color: var(--primary);">Portale Eventi:</strong> Hub centralizzato per tutti gli eventi organizzati dal gruppo editoriale, con sistema di prenotazione integrato
-                                </li>
-                                <li style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; color: var(--gray);">
-                                    <strong style="color: var(--primary);">Top Aziende:</strong> Verticale B2B dedicato alle eccellenze imprenditoriali del territorio, con classifiche e interviste
-                                </li>
-                                <li style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; color: var(--gray);">
-                                    <strong style="color: var(--primary);">Guida TV:</strong> Restyling completo della guida televisiva digitale con filtri avanzati e palinsesto real-time
-                                </li>
-                                <li style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; color: var(--gray);">
-                                    <strong style="color: var(--primary);">QS App & Sfogliatore:</strong> Sviluppo nuove app mobile per la lettura digitale del quotidiano
-                                </li>
-                                <li style="padding: 1rem 0; color: var(--gray);">
-                                    <strong style="color: var(--primary);">82 Sezioni Web:</strong> In 3 anni, sviluppo di sezioni tematiche, pagine autori, video hub, e verticali editoriali (QN Salus, QN Itinerari, Luce!)
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="tags" style="margin-top: 2rem;">
-                            <span class="tag">Multi-project Management</span>
-                            <span class="tag">WordPress</span>
-                            <span class="tag">DMDesk CMS</span>
-                            <span class="tag">Event Planning</span>
-                            <span class="tag">B2B Content</span>
+                            <div class="gallery-item"><img src="eventi.png" alt="Portale Eventi"></div>
+                            <div class="gallery-item"><img src="topaziende.png" alt="Top Aziende"></div>
                         </div>
                     </div>
                 </div>
@@ -862,50 +505,19 @@
             <h2 class="section-title">Competenze</h2>
             <div class="skills-grid">
                 <div class="skill-category">
-                    <h3>Product & Project Management</h3>
+                    <h3>Management</h3>
                     <ul>
-                        <li>Product Strategy & Roadmap</li>
-                        <li>Agile/Scrum Methodologies</li>
-                        <li>Jira, Trello</li>
-                        <li>User Research & Testing</li>
-                        <li>A/B Testing & Optimization</li>
+                        <li>Product Strategy</li>
+                        <li>Agile/Scrum</li>
                         <li>Stakeholder Management</li>
                     </ul>
                 </div>
-
                 <div class="skill-category">
-                    <h3>Technical Skills</h3>
+                    <h3>Technical</h3>
                     <ul>
-                        <li>HTML/CSS (Intermedio)</li>
-                        <li>CMS: DMDesk, WordPress, Wix</li>
-                        <li>Figma, Canva</li>
-                        <li>Git Version Control</li>
-                        <li>API Integration</li>
-                        <li>Google Tag Manager</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Analytics & Marketing</h3>
-                    <ul>
-                        <li>Google Analytics (GA4)</li>
-                        <li>Email Marketing (Piano ESP, Mailchimp)</li>
-                        <li>SEO/SEM (SEMRush, Yoast)</li>
-                        <li>Data Analysis & Reporting</li>
-                        <li>KPI Definition & Tracking</li>
-                        <li>Customer Journey Mapping</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Soft Skills</h3>
-                    <ul>
-                        <li>Leadership & Team Coordination</li>
-                        <li>Cross-functional Collaboration</li>
-                        <li>Problem Solving</li>
-                        <li>Comunicazione Efficace</li>
-                        <li>Time Management</li>
-                        <li>Multilingual (IT, EN, RU, ES, DE)</li>
+                        <li>HTML/CSS</li>
+                        <li>CMS (DMDesk, WordPress)</li>
+                        <li>GA4 & Analytics</li>
                     </ul>
                 </div>
             </div>
@@ -914,72 +526,24 @@
 
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Lavoriamo Insieme</h2>
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.9;">
-                Sono sempre interessata a nuove opportunità nel Product Management, Digital Innovation e Media Technology.
-            </p>
-            
+            <h2 class="section-title">Contatti</h2>
             <div class="contact-info">
-                <div class="contact-item">
-                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                    <a href="mailto:rosanna.zotta@outlook.it">rosanna.zotta@outlook.it</a>
-                </div>
-                <div class="contact-item">
-                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                    </svg>
-                    <a href="tel:+393491654768">+39 349 165 4768</a>
-                </div>
-                <div class="contact-item">
-                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                    </svg>
-                    <a href="https://linkedin.com/in/rosannazotta" target="_blank">LinkedIn</a>
-                </div>
+                <div class="contact-item"><a href="mailto:rosanna.zotta@outlook.it">rosanna.zotta@outlook.it</a></div>
+                <div class="contact-item"><a href="https://linkedin.com/in/rosannazotta" target="_blank">LinkedIn</a></div>
             </div>
-
-            <div class="cta-buttons">
-                <a href="Rosanna_Zotta_CV_2025.docx" class="cta-button" download>Scarica CV Completo</a>
-                <a href="mailto:rosanna.zotta@outlook.it" class="cta-button secondary">Scrivimi</a>
-            </div>
+            <a href="Rosanna_Zotta_CV_2025.pdf" class="cta-button" download>Scarica CV (PDF)</a>
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Rosanna Zotta. Tutti i diritti riservati.</p>
+        <p>&copy; 2025 Rosanna Zotta. Built for Performance.</p>
     </footer>
 
     <script>
-        // Navbar show on scroll
-        let lastScroll = 0;
         const navbar = document.getElementById('navbar');
-        
         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                navbar.classList.add('visible');
-            } else {
-                navbar.classList.remove('visible');
-            }
-            
-            lastScroll = currentScroll;
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
+            if (window.pageYOffset > 100) navbar.classList.add('visible');
+            else navbar.classList.remove('visible');
         });
     </script>
 </body>
