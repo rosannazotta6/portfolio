@@ -4,89 +4,183 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rosanna Zotta - Digital Product Manager Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --primary: #FF6B9D;
+            --secondary: #4ECDC4;
+            --accent: #FFA07A;
+            --purple: #8B5CF6;
+            --yellow: #FFD93D;
+            --dark: #1a1a2e;
+            --text: #2d3436;
+            --light: #f8f9fa;
+            --gradient-1: linear-gradient(135deg, #FF6B9D 0%, #FFA07A 100%);
+            --gradient-2: linear-gradient(135deg, #4ECDC4 0%, #8B5CF6 100%);
+            --gradient-3: linear-gradient(135deg, #FFD93D 0%, #FF6B9D 100%);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        :root {
-            --primary: #1a1a2e;
-            --accent: #e94560;
-            --secondary: #0f3460;
-            --light: #f8f9fa;
-            --gray: #6c757d;
-            --gold: #d4af37;
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Work Sans', sans-serif;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text);
             background: var(--light);
-            color: var(--primary);
-            line-height: 1.6;
             overflow-x: hidden;
         }
 
-        .grain {
+        /* Header Sticky con stile pop */
+        header {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            opacity: 0.03;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
             z-index: 1000;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            padding: 1.2rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
 
-        /* Hero Section */
+        header.scrolled {
+            padding: 0.8rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            font-size: 1rem;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+            border-radius: 10px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section - POP STYLE */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            justify-content: center;
+            padding: 8rem 2rem 4rem;
+            background: linear-gradient(135deg, #FFE8F0 0%, #E8F8F5 50%, #FFF4E8 100%);
             position: relative;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
             overflow: hidden;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                repeating-linear-gradient(
-                    0deg,
-                    transparent,
-                    transparent 2px,
-                    rgba(255,255,255,0.03) 2px,
-                    rgba(255,255,255,0.03) 4px
-                );
-            animation: scan 8s linear infinite;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 107, 157, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 20s ease-in-out infinite;
         }
 
-        @keyframes scan {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(100px); }
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(78, 205, 196, 0.2) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(50px, 50px) rotate(10deg); }
         }
 
         .hero-content {
-            text-align: center;
-            color: white;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
             z-index: 10;
-            padding: 2rem;
-            animation: fadeInUp 1s ease-out;
         }
 
-        @keyframes fadeInUp {
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(3rem, 8vw, 5.5rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: slideUp 1s ease-out;
+        }
+
+        @keyframes slideUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(50px);
             }
             to {
                 opacity: 1;
@@ -94,342 +188,241 @@
             }
         }
 
-        .hero h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 900;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-        }
-
-        .hero .subtitle {
+        .hero p {
             font-size: clamp(1.2rem, 3vw, 1.8rem);
-            font-weight: 300;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-            animation: fadeInUp 1s ease-out 0.2s backwards;
+            color: var(--text);
+            margin-bottom: 3rem;
+            max-width: 700px;
+            animation: slideUp 1s ease-out 0.2s backwards;
         }
 
-        .hero-stats {
+        .cta-buttons {
             display: flex;
-            gap: 3rem;
-            justify-content: center;
+            gap: 1.5rem;
             flex-wrap: wrap;
-            margin-top: 3rem;
-            animation: fadeInUp 1s ease-out 0.4s backwards;
+            animation: slideUp 1s ease-out 0.4s backwards;
         }
 
-        .stat-item {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 3rem;
-            font-weight: 700;
-            color: var(--gold);
-            display: block;
-            line-height: 1;
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-top: 0.5rem;
-            opacity: 0.8;
-        }
-
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-            opacity: 0.6;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0); }
-            50% { transform: translateX(-50%) translateY(10px); }
-        }
-
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            stroke: white;
-            fill: none;
-            stroke-width: 2;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            padding: 1.5rem 2rem;
-            background: rgba(26, 26, 46, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            transform: translateY(-100%);
-            transition: transform 0.3s ease;
-        }
-
-        nav.visible {
-            transform: translateY(0);
-        }
-
-        nav .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        nav .logo {
-            font-family: 'Playfair Display', serif;
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: white;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        nav a {
-            color: white;
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
             text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
         }
 
-        nav a:hover {
-            color: var(--gold);
+        .btn-primary {
+            background: var(--gradient-1);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
         }
 
-        /* Container */
-        .container {
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* About Section */
+        .about {
+            padding: 6rem 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Section */
-        section {
-            padding: 8rem 0;
         }
 
         .section-title {
-            font-family: 'Playfair Display', serif;
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: 3rem;
-            text-align: center;
-            position: relative;
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background: var(--accent);
-            margin: 1.5rem auto 0;
-        }
-
-        /* Case Studies */
-        .case-studies {
+        .about-content {
             display: grid;
-            gap: 6rem;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
         }
 
-        .case-study {
+        .about-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+        }
+
+        /* Projects Section */
+        .projects {
+            padding: 6rem 2rem;
             background: white;
-            border-radius: 0;
+        }
+
+        .projects-grid {
+            max-width: 1200px;
+            margin: 4rem auto 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .case-study:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(0,0,0,0.15);
-        }
-
-        .case-study-header {
-            background: linear-gradient(135deg, var(--secondary), var(--primary));
-            color: white;
-            padding: 3rem;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
-            overflow: hidden;
+            display: flex;
+            flex-direction: column;
         }
 
-        .case-study-header::before {
+        .project-card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            border-radius: 50%;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+            z-index: 1;
         }
 
-        .case-study-number {
-            font-family: 'Playfair Display', serif;
-            font-size: 1rem;
-            font-weight: 700;
-            color: var(--gold);
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            margin-bottom: 1rem;
+        .project-card:hover::before {
+            transform: scaleX(1);
         }
 
-        .case-study h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            margin-bottom: 1rem;
-            line-height: 1.2;
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
 
-        .case-study-subtitle {
-            font-size: 1.1rem;
-            opacity: 0.9;
-            font-weight: 300;
-        }
-
-        .case-study-image {
+        .project-image {
             width: 100%;
-            height: auto;
-            display: block;
-            border-bottom: 4px solid var(--accent);
+            height: 120px;
+            background: var(--gradient-1);
+            background-size: cover;
+            background-position: center center;
+            background-repeat: no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            font-weight: 800;
+            position: relative;
+            overflow: hidden;
         }
 
-        .case-study-content {
-            padding: 3rem;
+        .project-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.05) 100%);
         }
 
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0 3rem;
+        .project-number-overlay {
+            position: relative;
+            z-index: 10;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
-
-        .metric {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-left: 4px solid var(--accent);
+        
+        .project-img {
+            width: 100%;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease;
         }
-
-        .metric:hover {
-            transform: scale(1.05);
+        
+        .project-img:hover {
+            transform: scale(1.02);
         }
 
-        .metric-value {
-            font-family: 'Playfair Display', serif;
-            font-size: 2.5rem;
-            font-weight: 900;
-            color: var(--accent);
-            display: block;
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-number {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--primary);
             margin-bottom: 0.5rem;
         }
 
-        .metric-label {
-            font-size: 0.9rem;
-            color: var(--gray);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 500;
-        }
-
-        .challenge, .solution, .impact {
-            margin-bottom: 2rem;
-        }
-
-        .challenge h4, .solution h4, .impact h4 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
+        .project-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 1rem;
-            color: var(--secondary);
+            color: var(--dark);
         }
 
-        .challenge p, .solution p, .impact p {
-            color: var(--gray);
-            line-height: 1.8;
+        .project-description {
+            color: var(--text);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
         }
 
-        .tags {
+        .project-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-top: 2rem;
+            gap: 0.7rem;
         }
 
         .tag {
-            padding: 0.5rem 1.2rem;
-            background: var(--primary);
-            color: white;
-            border-radius: 50px;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 107, 157, 0.1);
+            color: var(--primary);
+            border-radius: 20px;
             font-size: 0.85rem;
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            font-weight: 600;
         }
 
-        /* Gallery Grid */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin: 3rem 0;
+        /* Skills Section */
+        .skills {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #FFE8F0 0%, #E8F8F5 100%);
         }
 
-        .gallery-item {
-            position: relative;
-            overflow: hidden;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-        }
-
-        .gallery-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-
-        /* Skills */
-        .skills-grid {
+        .skills-container {
+            max-width: 1200px;
+            margin: 4rem auto 0;
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+            gap: 2.5rem;
         }
 
         .skill-category {
             background: white;
             padding: 2.5rem;
-            border-radius: 0;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
-            border-top: 4px solid var(--accent);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s ease;
         }
 
@@ -437,643 +430,571 @@
             transform: translateY(-5px);
         }
 
+        .skill-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+        }
+
+        .skill-category:nth-child(2) .skill-icon {
+            background: var(--gradient-2);
+        }
+
+        .skill-category:nth-child(3) .skill-icon {
+            background: var(--gradient-3);
+        }
+
+        .skill-category:nth-child(4) .skill-icon {
+            background: linear-gradient(135deg, #8B5CF6 0%, #FF6B9D 100%);
+        }
+
         .skill-category h3 {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Outfit', sans-serif;
             font-size: 1.5rem;
             font-weight: 700;
             margin-bottom: 1.5rem;
-            color: var(--primary);
+            color: var(--dark);
         }
 
-        .skill-category ul {
+        .skill-list {
             list-style: none;
         }
 
-        .skill-category li {
-            padding: 0.6rem 0;
-            border-bottom: 1px solid #e9ecef;
-            color: var(--gray);
-            font-weight: 500;
+        .skill-list li {
+            padding: 0.7rem 0;
+            color: var(--text);
+            position: relative;
+            padding-left: 1.5rem;
         }
 
-        .skill-category li:last-child {
-            border-bottom: none;
+        .skill-list li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: 700;
         }
 
-        /* Contact */
+        /* Contact Section */
         .contact {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            padding: 6rem 2rem;
+            background: var(--dark);
             color: white;
             text-align: center;
         }
 
         .contact .section-title {
-            color: white;
+            background: linear-gradient(135deg, #FFD93D 0%, #FF6B9D 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .contact .section-title::after {
-            background: var(--gold);
+        .contact p {
+            font-size: 1.3rem;
+            margin: 2rem 0 3rem;
+            opacity: 0.9;
         }
 
-        .contact-info {
+        .contact-links {
             display: flex;
             justify-content: center;
-            gap: 3rem;
+            gap: 2rem;
             flex-wrap: wrap;
             margin-top: 3rem;
-            font-size: 1.2rem;
         }
 
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .contact-item a {
+        .contact-link {
+            padding: 1.2rem 2.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50px;
             color: white;
             text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-
-        .contact-item a:hover {
-            color: var(--gold);
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1.5rem;
-            justify-content: center;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1.2rem 3rem;
-            background: var(--gold);
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            border-radius: 0;
+            font-weight: 600;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            backdrop-filter: blur(10px);
         }
 
-        .cta-button:hover {
+        .contact-link:hover {
             background: white;
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-        }
-
-        .cta-button.secondary {
-            background: transparent;
-            border: 2px solid var(--gold);
-            color: var(--gold);
-        }
-
-        .cta-button.secondary:hover {
-            background: var(--gold);
-            color: var(--primary);
+            color: var(--dark);
+            transform: translateY(-5px);
         }
 
         /* Footer */
         footer {
-            background: var(--primary);
-            color: white;
-            text-align: center;
+            background: #0f0f1a;
+            color: rgba(255, 255, 255, 0.7);
             padding: 2rem;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            text-align: center;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            nav ul {
-                display: none;
-            }
-
-            .hero-stats {
+            .nav-links {
                 gap: 1.5rem;
             }
 
-            .metrics-grid {
+            .hero {
+                padding: 6rem 1.5rem 3rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
+        }
 
-            section {
-                padding: 4rem 0;
-            }
+        /* Smooth scroll animation */
+        section {
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+        }
 
-            .case-study h3 {
-                font-size: 2rem;
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
             }
+        }
+
+        /* Decorative elements */
+        .blob-1, .blob-2 {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--primary);
+            top: 20%;
+            right: -10%;
+            animation: blob-float 20s ease-in-out infinite;
+        }
+
+        .blob-2 {
+            width: 350px;
+            height: 350px;
+            background: var(--secondary);
+            bottom: 10%;
+            left: -10%;
+            animation: blob-float 25s ease-in-out infinite reverse;
+        }
+
+        @keyframes blob-float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(50px, 30px) scale(1.1); }
         }
     </style>
 </head>
 <body>
-    <div class="grain"></div>
-
-    <nav id="navbar">
-        <div class="container">
+    <!-- Header -->
+    <header id="header">
+        <nav>
             <div class="logo">RZ</div>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#work">Progetti</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contatti</a></li>
             </ul>
-        </div>
-    </nav>
+        </nav>
+    </header>
 
-    <section class="hero">
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="blob-1"></div>
+        <div class="blob-2"></div>
         <div class="hero-content">
             <h1>Rosanna Zotta</h1>
-            <p class="subtitle"> Digital Product Manager specializzata in Digital Innovation & Media</p>
-            
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number">1.3M+</span>
-                    <span class="stat-label">Newsletter Subscribers</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">82</span>
-                    <span class="stat-label">Web Sections Built</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number">+6.5%</span>
-                    <span class="stat-label">Open Rate Growth</span>
-                </div>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24">
-                <polyline points="7 13 12 18 17 13"></polyline>
-                <polyline points="7 6 12 11 17 6"></polyline>
-            </svg>
-        </div>
-    </section>
-
-    <section id="about">
-        <div class="container">
-            <h2 class="section-title">Chi Sono</h2>
-            <div style="max-width: 800px; margin: 0 auto; text-align: center; font-size: 1.2rem; line-height: 1.8; color: var(--gray);">
-                <p>Digital Product Manager con 3+ anni di esperienza nella gestione end-to-end di prodotti digitali per il settore media ed editoriale. Appassionata di innovazione digitale, trasformo dati in decisioni strategiche e idee in prodotti scalabili.</p>
-                <p style="margin-top: 1.5rem;">Il mio approccio combina visione strategica, competenze tecniche e focus sull'impatto misurabile: ogni progetto che gestisco parte da un'analisi approfondita e porta a risultati concreti.</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="work" style="background: #f8f9fa;">
-        <div class="container">
-            <h2 class="section-title">I Miei Progetti</h2>
-            
-            <div class="case-studies">
-                <!-- Case Study 1: Newsletter -->
-                <div class="case-study">
-                    <div class="case-study-header">
-                        <div class="case-study-number">Progetto 01</div>
-                        <h3>Newsletter Restyling & Optimization</h3>
-                        <p class="case-study-subtitle">Incremento delle performance del 6.5% in 3 mesi</p>
-                    </div>
-                    <img src="newsletter.png" alt="Newsletter Quotidiano Nazionale" class="case-study-image">
-                    <div class="case-study-content">
-                        <div class="metrics-grid">
-                            <div class="metric">
-                                <span class="metric-value">1.3M+</span>
-                                <span class="metric-label">Iscritti Totali</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">49%</span>
-                                <span class="metric-label">Open Rate</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">20%</span>
-                                <span class="metric-label">CTR Medio</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">+6.5%</span>
-                                <span class="metric-label">Crescita OR</span>
-                            </div>
-                        </div>
-
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Gestione quotidiana di 57 newsletter editoriali + 7 DEM mensili con performance stagnanti. Open rate medio del 46%, inferiore ai benchmark di settore. Template datati e processo di creazione non ottimizzato.</p>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p>Restyling completo del sistema newsletter: redesign dei template con coding autonomo in HTML/CSS, ottimizzazione UX mobile-first, segmentazione audience migliorata, e implementazione di A/B testing sistematico. Automazione del workflow di produzione tramite Piano ESP con reportistica KPI settimanale.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>In soli 3 mesi: incremento dell'open rate dal 46% al 49% (+6.5%), CTR medio stabile al 20%, riduzione del 30% del tempo di produzione, e framework scalabile replicato su tutte le 57 edizioni quotidiane.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">Email Marketing</span>
-                            <span class="tag">HTML/CSS</span>
-                            <span class="tag">Piano ESP</span>
-                            <span class="tag">A/B Testing</span>
-                            <span class="tag">Analytics</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Case Study 2: Oroscopo -->
-                <div class="case-study">
-                    <div class="case-study-header">
-                        <div class="case-study-number">Progetto 02</div>
-                        <h3>Progetto Oroscopo: Da Zero a 26K Pageviews/Anno</h3>
-                        <p class="case-study-subtitle">Ideazione e sviluppo completo di una nuova sezione editoriale</p>
-                    </div>
-                    <img src="oroscopo.png" alt="Sezione Oroscopo QN" class="case-study-image">
-                    <div class="case-study-content">
-                        <div class="metrics-grid">
-                            <div class="metric">
-                                <span class="metric-value">26K</span>
-                                <span class="metric-label">Pageviews/Mese</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">58%</span>
-                                <span class="metric-label">Click Ratio</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">18%</span>
-                                <span class="metric-label">Scroll Depth</span>
-                            </div>
-                            <div class="metric">
-                                <span class="metric-value">13s</span>
-                                <span class="metric-label">View Time Medio</span>
-                            </div>
-                        </div>
-
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Sezione oroscopo esistente praticamente inattiva con performance quasi nulle. Necessità di creare un prodotto editoriale attraente che generasse traffico costante e engagement significativo, partendo da zero sia lato strategia che implementazione tecnica.</p>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p>Gestione end-to-end del progetto: analisi di mercato e benchmark competitivo, definizione strategia contenuti e flusso utente, design UX/UI con formato articolo custom giornaliero, creazione componenti dedicati su CMS DMDesk, e implementazione sistema di aggiornamento quotidiano automatizzato.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>Risultati in 12 mesi: 26.169 pageviews annuali da sezione precedentemente inattiva, click ratio del 58% (audience altamente engaged), 18% scroll depth con 13s di view time medio. Il progetto è diventato case study interno per lo sviluppo di nuove sezioni verticali.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">Product Strategy</span>
-                            <span class="tag">UX Design</span>
-                            <span class="tag">CMS Development</span>
-                            <span class="tag">DMDesk</span>
-                            <span class="tag">Content Strategy</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Case Study 3: 140 Anni Carlino -->
-                <div class="case-study">
-                    <div class="case-study-header">
-                        <div class="case-study-number">Progetto 03</div>
-                        <h3>140 Anni del Resto del Carlino</h3>
-                        <p class="case-study-subtitle">Landing page celebrativa con eventi e timeline interattiva</p>
-                    </div>
-                    <img src="140anni.png" alt="Landing Page 140 Anni Carlino" class="case-study-image">
-                    <div class="case-study-content">
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Creare una landing page istituzionale per celebrare i 140 anni de Il Resto del Carlino, il giornale più antico d'Italia. Necessità di raccontare la storia in modo coinvolgente, integrare eventi sul territorio, e gestire partnership con enti e aziende locali.</p>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p>Progettazione e sviluppo di landing page WordPress con timeline storica interattiva, sezione eventi con filtri geografici, gallery fotografica d'archivio, area partner con loghi istituzionali. Design responsive che combina elementi storici (prime pagine d'epoca) con estetica moderna.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>Hub digitale centrale per tutte le celebrazioni del 140° anniversario. Coordinamento di eventi in 15+ città (Bologna, Ancona, Rimini, Ferrara...), vetrina per 50+ partner istituzionali e aziendali. Punto di riferimento per contenuti speciali e magazine dedicati.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">WordPress</span>
-                            <span class="tag">Event Management</span>
-                            <span class="tag">Brand Heritage</span>
-                            <span class="tag">UX/UI Design</span>
-                            <span class="tag">Partnership</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Case Study 4: Centro Notifiche -->
-                <div class="case-study">
-                    <div class="case-study-header">
-                        <div class="case-study-number">Progetto 04</div>
-                        <h3>Centro Notifiche Push Personalizzato</h3>
-                        <p class="case-study-subtitle">Sistema di notifiche multi-argomento per 4 testate nazionali</p>
-                    </div>
-                    <img src="notifiche.png" alt="Centro Notifiche QN" class="case-study-image">
-                    <div class="case-study-content">
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Implementare sistema di notifiche push personalizzato per Quotidiano Nazionale e le sue 4 edizioni locali (Carlino, Il Giorno, La Nazione). Necessità di permettere agli utenti di scegliere argomenti di interesse evitando notification fatigue.</p>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p>Sviluppo di Centro Notifiche dedicato con categorizzazione per argomento (Cronaca, Sport, Economia, Esteri, Magazine, Politica, ecc.) e per edizione locale. UX intuitiva con toggle on/off immediati. Integrazione tecnica con sistema di push notification esistente e tracking analytics.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>Lancio feature innovativa nel panorama editoriale italiano. Maggiore engagement utenti grazie a personalizzazione granulare. Riduzione unsubscribe rate dalle notifiche. Sistema replicato poi su altre testate del gruppo Monrif.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">Push Notifications</span>
-                            <span class="tag">User Preference</span>
-                            <span class="tag">Product Innovation</span>
-                            <span class="tag">Multi-brand</span>
-                            <span class="tag">Analytics</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Case Study 5: Newsletter Campaign Buongiorno -->
-                <div class="case-study">
-                    <div class="case-study-header">
-                        <div class="case-study-number">05</div>
-                        <h3>Newsletter Campaign 'Buongiorno'</h3>
-                        <p class="case-study-subtitle">Campagna di affiliazione multi-canale per Quotidiano Nazionale</p>
-                    </div>
-                    <div class="case-study-content">
-                        <div class="challenge">
-                            <h4>La Sfida</h4>
-                            <p>Incrementare la base iscritti della newsletter "Buongiorno" di Quotidiano Nazionale attraverso una campagna di affiliazione che comunicasse efficacemente il valore del prodotto: ricevere ogni mattina notizie locali rilevanti sulla propria città. La sfida consisteva nel creare un concept visivo riconoscibile e declinarlo su tutti i canali (digital, social e print) mantenendo coerenza di brand e ottimizzando per la conversione.</p>
-                        </div>
-
-                        <div class="metrics">
-                            <div style="text-align: center; margin-bottom: 2rem;">
-                                <p style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gray); font-weight: 600;">Risultati Campagna - 2 Settimane</p>
-                            </div>
-                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem;">
-                                <div class="metric-card" style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div class="metric-value" style="color: var(--accent); font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem;">30%</div>
-                                    <div class="metric-label" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray);">Conversioni<br/>(Iscrizioni)</div>
-                                </div>
-                                <div class="metric-card" style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div class="metric-value" style="color: var(--accent); font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem;">8400</div>
-                                    <div class="metric-label" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray);">Crescita Lista<br/>(Netti)</div>
-                                </div>
-                                <div class="metric-card" style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div class="metric-value" style="color: var(--secondary); font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem;">47.945</div>
-                                    <div class="metric-label" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray);">Visualizzazioni<br/>Social</div>
-                                </div>
-                                <div class="metric-card" style="text-align: center; padding: 1.5rem; background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%); border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <div class="metric-value" style="color: var(--secondary); font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 700; margin-bottom: 0.5rem;">28.462</div>
-                                    <div class="metric-label" style="font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gray);">Copertura<br/>Social</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="solution">
-                            <h4>La Soluzione</h4>
-                            <p><strong>Concept & Creative Direction:</strong> Sviluppo di un'identità visiva distintiva con palette blu e giallo vibrante e illustrazioni stilizzate delle città italiane, creando un'immagine accogliente che riflette il tono mattutino della newsletter. Il messaggio "La tua città, raccontata ogni mattina" è stato posizionato strategicamente per comunicare immediatamente il valore della subscription.</p>
-                            
-                            <p style="margin-top: 1rem;"><strong>Produzione Asset Multi-canale:</strong> Coordinamento della produzione di asset creativi per tutti i touchpoint:</p>
-                            <ul style="margin: 1rem 0 1rem 1.5rem; list-style: none;">
-                                <li style="padding: 0.3rem 0; color: var(--gray);">→ Digital Banner (300x250 px) per display advertising web</li>
-                                <li style="padding: 0.3rem 0; color: var(--gray);">→ Instagram Stories (1080x1920 px) per engagement social</li>
-                                <li style="padding: 0.3rem 0; color: var(--gray);">→ Instagram Post (1080x1080 px) per feed organico</li>
-                                <li style="padding: 0.3rem 0; color: var(--gray);">→ Stampa (261x336 mm) per campagna tradizionale</li>
-                            </ul>
-
-                            <!-- Creative Assets Gallery -->
-                            <div style="margin-top: 2.5rem;">
-                                <h4 style="margin-bottom: 1.5rem;">Asset Creativi</h4>
-                                <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-                                    <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
-                                        <img src="QN-newsletter-banner.png" alt="Digital Banner 300x250" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 1rem; text-align: center;">
-                                            <strong style="display: block; color: var(--primary); margin-bottom: 0.3rem;">Digital Banner</strong>
-                                            <span style="font-size: 0.85rem; color: var(--gray);">300x250 px - Web Display</span>
-                                        </div>
-                                    </div>
-                                    <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
-                                        <img src="QN-newsletter-story.png" alt="Instagram Story" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 1rem; text-align: center;">
-                                            <strong style="display: block; color: var(--primary); margin-bottom: 0.3rem;">Instagram Story</strong>
-                                            <span style="font-size: 0.85rem; color: var(--gray);">1080x1920 px - Social Media</span>
-                                        </div>
-                                    </div>
-                                    <div style="background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: transform 0.3s ease;">
-                                        <img src="QN-newsletter-post.png" alt="Instagram Post" style="width: 100%; height: auto; display: block;">
-                                        <div style="padding: 1rem; text-align: center;">
-                                            <strong style="display: block; color: var(--primary); margin-bottom: 0.3rem;">Instagram Post</strong>
-                                            <span style="font-size: 0.85rem; color: var(--gray);">1080x1080 px - Feed</span>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div style="margin-top: 1rem; text-align: center;">
-                                    <a href="QN-newsletter-print.pdf" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.8rem 1.5rem; background: var(--secondary); color: white; text-decoration: none; border-radius: 5px; font-size: 0.9rem; transition: background 0.3s ease;">
-                                        <svg width="18" height="18" fill="white" viewBox="0 0 24 24">
-                                            <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
-                                        </svg>
-                                        Visualizza Campagna Stampa (PDF)
-                                    </a>
-                                </div>
-                            </div>
-
-                            <p style="margin-top: 2rem;"><strong>Strategia & Ottimizzazione:</strong> Gestione del coordinamento cross-channel con targeting geografico per città specifiche, landing page ottimizzata per conversione con form di iscrizione semplificato, A/B testing su copy e visual, e monitoraggio real-time delle metriche chiave. Sistema di tracking completo per analizzare performance per canale e identificare opportunità di ottimizzazione.</p>
-                        </div>
-
-                        <div class="impact">
-                            <h4>L'Impatto</h4>
-                            <p>In sole <strong>2 settimane di campagna</strong>, i risultati hanno superato gli obiettivi iniziali: <strong>30% di conversion rate</strong> e una crescita netta di <strong>8400 iscritti</strong>, dimostrando un'eccellente retention attraverso targeting accurato. La strategia social ha generato <strong>47.945 visualizzazioni</strong> con una copertura di <strong>28.462 utenti unici</strong>. L'approccio multi-canale integrato ha permesso di ottimizzare le performance su ogni touchpoint, stabilendo best practices replicabili per future campagne di affiliazione del gruppo editoriale.</p>
-                        </div>
-
-                        <div class="tags">
-                            <span class="tag">Campaign Management</span>
-                            <span class="tag">Creative Direction</span>
-                            <span class="tag">Multi-channel Marketing</span>
-                            <span class="tag">Conversion Optimization</span>
-                            <span class="tag">Performance Analytics</span>
-                            <span class="tag">A/B Testing</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Case Study 6: Altri Progetti -->
-                <div class="case-study">
-                    <div class="case-study-header">
-                        <div class="case-study-number">Portfolio</div>
-                        <h3>Altri Progetti & Iniziative</h3>
-                        <p class="case-study-subtitle">Eventi, verticali editoriali e iniziative speciali</p>
-                    </div>
-                    <div class="case-study-content">
-                        <div class="gallery-grid">
-                            <div class="gallery-item">
-                                <img src="eventi.png" alt="Portale Eventi QN">
-                            </div>
-                            <div class="gallery-item">
-                                <img src="topaziende.png" alt="Top Aziende - Verticale B2B">
-                            </div>
-                        </div>
-
-                        <div style="margin-top: 3rem;">
-                            <h4 style="font-family: 'Playfair Display', serif; font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--secondary);">Highlights Portfolio</h4>
-                            <ul style="list-style: none; padding: 0;">
-                                <li style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; color: var(--gray);">
-                                    <strong style="color: var(--primary);">Portale Eventi:</strong> Hub centralizzato per tutti gli eventi organizzati dal gruppo editoriale, con sistema di prenotazione integrato
-                                </li>
-                                <li style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; color: var(--gray);">
-                                    <strong style="color: var(--primary);">Top Aziende:</strong> Verticale B2B dedicato alle eccellenze imprenditoriali del territorio, con classifiche e interviste
-                                </li>
-                                <li style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; color: var(--gray);">
-                                    <strong style="color: var(--primary);">Guida TV:</strong> Restyling completo della guida televisiva digitale con filtri avanzati e palinsesto real-time
-                                </li>
-                                <li style="padding: 1rem 0; border-bottom: 1px solid #e9ecef; color: var(--gray);">
-                                    <strong style="color: var(--primary);">QS App & Sfogliatore:</strong> Sviluppo nuove app mobile per la lettura digitale del quotidiano
-                                </li>
-                                <li style="padding: 1rem 0; color: var(--gray);">
-                                    <strong style="color: var(--primary);">82 Sezioni Web:</strong> In 3 anni, sviluppo di sezioni tematiche, pagine autori, video hub, e verticali editoriali (QN Salus, QN Itinerari, Luce!)
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="tags" style="margin-top: 2rem;">
-                            <span class="tag">Multi-project Management</span>
-                            <span class="tag">WordPress</span>
-                            <span class="tag">DMDesk CMS</span>
-                            <span class="tag">Event Planning</span>
-                            <span class="tag">B2B Content</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="skills">
-        <div class="container">
-            <h2 class="section-title">Competenze</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Product & Project Management</h3>
-                    <ul>
-                        <li>Product Strategy & Roadmap</li>
-                        <li>Agile/Scrum Methodologies</li>
-                        <li>Jira, Trello</li>
-                        <li>User Research & Testing</li>
-                        <li>A/B Testing & Optimization</li>
-                        <li>Stakeholder Management</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Technical Skills</h3>
-                    <ul>
-                        <li>HTML/CSS (Intermedio)</li>
-                        <li>CMS: DMDesk, WordPress, Wix</li>
-                        <li>Figma, Canva</li>
-                        <li>Git Version Control</li>
-                        <li>API Integration</li>
-                        <li>Google Tag Manager</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Analytics & Marketing</h3>
-                    <ul>
-                        <li>Google Analytics (GA4)</li>
-                        <li>Email Marketing (Piano ESP, Mailchimp)</li>
-                        <li>SEO/SEM (SEMRush, Yoast)</li>
-                        <li>Data Analysis & Reporting</li>
-                        <li>KPI Definition & Tracking</li>
-                        <li>Customer Journey Mapping</li>
-                    </ul>
-                </div>
-
-                <div class="skill-category">
-                    <h3>Soft Skills</h3>
-                    <ul>
-                        <li>Leadership & Team Coordination</li>
-                        <li>Cross-functional Collaboration</li>
-                        <li>Problem Solving</li>
-                        <li>Comunicazione Efficace</li>
-                        <li>Time Management</li>
-                        <li>Multilingual (IT, EN, RU, ES, DE)</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Lavoriamo Insieme</h2>
-            <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto; opacity: 0.9;">
-                Sono sempre interessata a nuove opportunità nel Product Management, Digital Innovation e Media Technology.
-            </p>
-            
-            <div class="contact-info">
-                <div class="contact-item">
-                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-                        <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-                    </svg>
-                    <a href="mailto:rosanna.zotta@outlook.it"><span class="__cf_email__" data-cfemail="rosanna.zotta@outlook.it">[rosanna.zotta@outlook.it]</span></a>
-                </div>
-                <div class="contact-item">
-                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-                        <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
-                    </svg>
-                    <a href="tel:+393491654768">+39 349 165 4768</a>
-                </div>
-                <div class="contact-item">
-                    <svg width="24" height="24" fill="white" viewBox="0 0 24 24">
-                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
-                    </svg>
-                    <a href="https://linkedin.com/in/rosannazotta" target="_blank">LinkedIn</a>
-                </div>
-            </div>
-
+            <p>Digital Product Manager che trasforma dati in decisioni strategiche e idee in prodotti scalabili 🚀</p>
             <div class="cta-buttons">
-                <a href="Rosanna_Zotta_CV.pdf" class="cta-button" download>Visualizza il mio CV</a>
-                <a href="/cdn-cgi/l/email-protection#2f5d405c4e41414e0155405b5b4e6f405a5b4340404401465b" class="cta-button secondary">Scrivimi</a>
+                <a href="#work" class="btn btn-primary">Vedi i Progetti</a>
+                <a href="#contact" class="btn btn-secondary">Contattami</a>
             </div>
         </div>
     </section>
 
+    <!-- About Section -->
+    <section class="about" id="about">
+        <h2 class="section-title">Chi Sono</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Digital Product Manager con <strong>3+ anni di esperienza</strong> nella gestione end-to-end di prodotti digitali per il settore media ed editoriale. Appassionata di innovazione digitale, trasformo dati in decisioni strategiche e idee in prodotti scalabili.</p>
+                <p>Il mio approccio combina visione strategica, competenze tecniche e focus sull'impatto misurabile: ogni progetto che gestisco parte da un'analisi approfondita e porta a risultati concreti.</p>
+                <p><strong>Numeri chiave:</strong> 1.3M+ iscritti newsletter gestiti | 82 sezioni web sviluppate | +6.5% crescita open rate | 30% conversion rate campagne</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects" id="work">
+        <h2 class="section-title" style="text-align: center;">I Miei Progetti</h2>
+        
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image" style="background: var(--gradient-1);">
+                    <div class="project-number-overlay">01</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">Progetto 01</div>
+                    <h3 class="project-title">Newsletter Restyling & Optimization</h3>
+                    <p class="project-description">Incremento dell'open rate del 6.5% in 3 mesi</p>
+                    
+                    <img src="newsletter.png" alt="Newsletter Restyling" class="project-img">
+                    
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; padding: 1rem; background: rgba(255, 107, 157, 0.05); border-radius: 12px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">1.3M+</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Iscritti</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">49%</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Open Rate</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">20%</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">CTR</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: var(--primary);">+6.5%</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Crescita</div>
+                        </div>
+                    </div>
+
+                    <p style="margin-bottom: 1rem; line-height: 1.7;"><strong>La Sfida:</strong> Gestione quotidiana di 57 newsletter editoriali + 7 DEM mensili con performance stagnanti. Open rate medio del 46%, inferiore ai benchmark di settore. Template datati e processo di creazione non ottimizzato.</p>
+                    
+                    <p style="margin-bottom: 1rem; line-height: 1.7;"><strong>La Soluzione:</strong> Restyling completo del sistema newsletter: redesign dei template con coding autonomo in HTML/CSS, ottimizzazione UX mobile-first, segmentazione audience migliorata, e implementazione di A/B testing sistematico. Automazione del workflow di produzione tramite Piano ESP con reportistica KPI settimanale.</p>
+                    
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7;"><strong>L'Impatto:</strong> In soli 3 mesi: incremento dell'open rate dal 46% al 49% (+6.5%), CTR medio stabile al 20%, riduzione del 30% del tempo di produzione, e framework scalabile replicato su tutte le 57 edizioni quotidiane.</p>
+                    
+                    <div class="project-tags">
+                        <span class="tag">Email Marketing</span>
+                        <span class="tag">HTML/CSS</span>
+                        <span class="tag">Piano ESP</span>
+                        <span class="tag">A/B Testing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: var(--gradient-2);">
+                    <div class="project-number-overlay">02</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">Progetto 02</div>
+                    <h3 class="project-title">Progetto Oroscopo</h3>
+                    <p class="project-description">Creazione da zero di una nuova sezione editoriale</p>
+                    
+                    <img src="oroscopo.png" alt="Sezione Oroscopo" class="project-img">
+                    
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; padding: 1rem; background: rgba(78, 205, 196, 0.05); border-radius: 12px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: var(--secondary);">26K</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Pageviews</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: var(--secondary);">58%</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Click Ratio</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: var(--secondary);">18%</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Scroll Depth</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: var(--secondary);">13s</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">View Time</div>
+                        </div>
+                    </div>
+                     <p style="margin-bottom: 1rem; line-height: 1.7;"><strong>La Sfida:</strong> Sezione oroscopo esistente praticamente inattiva con performance quasi nulle. Necessità di creare un prodotto editoriale attraente che generasse traffico costante e engagement significativo, partendo da zero sia lato strategia che implementazione tecnica.</p>
+                    
+                    <p style="margin-bottom: 1rem; line-height: 1.7;"><strong>La Soluzione:</strong> Gestione end-to-end del progetto: analisi di mercato e benchmark competitivo, definizione strategia contenuti e flusso utente, design UX/UI con formato articolo custom giornaliero, creazione componenti dedicati su CMS DMDesk, e implementazione sistema di aggiornamento quotidiano automatizzato.</p>
+                    
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7;"><strong>L'Impatto:</strong> Risultati in 12 mesi: 26.169 pageviews annuali da sezione precedentemente inattiva, click ratio del 58% (audience altamente engaged), 18% scroll depth con 13s di view time medio. Il progetto è diventato case study interno per lo sviluppo di nuove sezioni verticali.</p>
+                    
+
+                    <div class="project-tags">
+                        <span class="tag">Product Strategy</span>
+                        <span class="tag">UX Design</span>
+                        <span class="tag">CMS Development</span>
+                        <span class="tag">DMDesk</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: var(--gradient-3);">
+                    <div class="project-number-overlay">03</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">Progetto 03</div>
+                    <h3 class="project-title">140 Anni del Resto del Carlino</h3>
+                    <p class="project-description">Landing page celebrativa con timeline interattiva.                    
+                    <img src="140anni.png" alt="140 Anni Carlino" class="project-img">
+                    
+                    <div class="project-tags">
+                        <span class="tag">WordPress</span>
+                        <span class="tag">Event Management</span>
+                        <span class="tag">Brand Heritage</span>
+                        <span class="tag">UX/UI Design</span>
+                    </div>
+                </div>
+            </div>
+
+            <p style="margin: 1.5rem 0 1rem; line-height: 1.7;"><strong>La Sfida:</strong> Creare una landing page istituzionale per celebrare i 140 anni de Il Resto del Carlino, il giornale più antico d'Italia. Necessità di raccontare la storia in modo coinvolgente, integrare eventi sul territorio, e gestire partnership con enti e aziende locali.</p>
+                    
+                    <p style="margin-bottom: 1rem; line-height: 1.7;"><strong>La Soluzione:</strong> Progettazione e sviluppo di landing page WordPress con timeline storica interattiva, sezione eventi con filtri geografici, gallery fotografica d'archivio, area partner con loghi istituzionali. Design responsive che combina elementi storici (prime pagine d'epoca) con estetica moderna.</p>
+                    
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7;"><strong>L'Impatto:</strong> Hub digitale centrale per tutte le celebrazioni del 140° anniversario. Coordinamento di eventi in 15+ città (Bologna, Ancona, Rimini, Ferrara...), vetrina per 50+ partner istituzionali e aziendali. Punto di riferimento per contenuti speciali e magazine dedicati.</p>
+                    
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #8B5CF6 0%, #FF6B9D 100%);">
+                    <div class="project-number-overlay">04</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">Progetto 04</div>
+                    <h3 class="project-title">Centro Notifiche Push</h3>
+                    <p class="project-description">Sistema di notifiche personalizzato multi-argomento per 4 testate nazionali</p>
+                    
+                    <img src="notifiche.png" alt="Centro Notifiche" class="project-img">
+                    
+                    <div class="project-tags">
+                        <span class="tag">Push Notifications</span>
+                        <span class="tag">User Preference</span>
+                        <span class="tag">Product Innovation</span>
+                        <span class="tag">Multi-brand</span>
+                    </div>
+                </div>
+            </div>
+                    <p style="margin: 1.5rem 0 1rem; line-height: 1.7;"><strong>La Sfida:</strong> Implementare sistema di notifiche push personalizzato per Quotidiano Nazionale e le sue 4 edizioni locali (Carlino, Il Giorno, La Nazione). Necessità di permettere agli utenti di scegliere argomenti di interesse evitando notification fatigue.</p>
+                    
+                    <p style="margin-bottom: 1rem; line-height: 1.7;"><strong>La Soluzione:</strong> Sviluppo di Centro Notifiche dedicato con categorizzazione per argomento (Cronaca, Sport, Economia, Esteri, Magazine, Politica, ecc.) e per edizione locale. UX intuitiva con toggle on/off immediati. Integrazione tecnica con sistema di push notification esistente e tracking analytics.</p>
+                    
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7;"><strong>L'Impatto:</strong> Lancio feature innovativa nel panorama editoriale italiano. Maggiore engagement utenti grazie a personalizzazione granulare. Riduzione unsubscribe rate dalle notifiche. Sistema replicato poi su altre testate del gruppo Monrif.</p>
+                    
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #FFD93D 0%, #FF6B9D 100%);">
+                    <div class="project-number-overlay">05</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">Progetto 05</div>
+                    <h3 class="project-title">Campagna 'Buongiorno'</h3>
+                    <p class="project-description">Campagna affiliazione cross-testata multi-canale</p>
+                    
+                    <img src="QN-newsletter-post.png" alt="Campagna Buongiorno" class="project-img">
+                    
+                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; padding: 1rem; background: rgba(255, 211, 61, 0.1); border-radius: 12px;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: #FFD93D;">30%</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Conversion</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: #FFD93D;">8.4K</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Iscritti</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: #FFD93D;">47K</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Views</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 1.4rem; font-weight: 800; color: #FFD93D;">28K</div>
+                            <div style="font-size: 0.75rem; color: var(--text); opacity: 0.7;">Copertura</div>
+                        </div>
+                    </div>
+                    
+                    <p style="font-weight: 600; margin-bottom: 0.8rem; color: var(--dark); font-size: 0.95rem;">Asset Creativi:</p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem; margin-bottom: 1.5rem;">
+                        <img src="QN-newsletter-banner.png" alt="Banner" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                        <img src="QN-newsletter-story.png" alt="Story" style="width: 100%; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
+                    </div>
+
+                    <p style="margin-bottom: 1rem; line-height: 1.7;"><strong>La Sfida:</strong> Incrementare la base iscritti della newsletter "Buongiorno" attraverso una campagna di affiliazione che comunicasse il valore del prodotto: ricevere ogni mattina notizie locali rilevanti sulla propria città. Creare un concept visivo riconoscibile e declinarlo su tutti i canali (digital, social e print).</p>
+                    
+                    <p style="margin-bottom: 1rem; line-height: 1.7;"><strong>La Soluzione:</strong> Sviluppo di un'identità visiva distintiva con palette blu e giallo vibrante e illustrazioni stilizzate delle città italiane. Coordinamento produzione asset creativi per tutti i touchpoint: digital banner (300x250px), Instagram Stories e Post, stampa (261x336mm). Strategia con targeting geografico, landing page ottimizzata e A/B testing.</p>
+                    
+                    <p style="margin-bottom: 1.5rem; line-height: 1.7;"><strong>L'Impatto:</strong> In sole 2 settimane: 30% conversion rate e crescita netta di 8.400 iscritti. La strategia social ha generato 47.945 visualizzazioni con copertura di 28.462 utenti unici. L'approccio multi-canale integrato ha stabilito best practices replicabili per future campagne del gruppo editoriale.</p>
+                                       
+                    <div class="project-tags">
+                        <span class="tag">Campaign Management</span>
+                        <span class="tag">Creative Direction</span>
+                        <span class="tag">Multi-channel</span>
+                        <span class="tag">A/B Testing</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image" style="background: linear-gradient(135deg, #FFA07A 0%, #8B5CF6 100%);">
+                    <div class="project-number-overlay">+</div>
+                </div>
+                <div class="project-content">
+                    <div class="project-number">Portfolio</div>
+                    <h3 class="project-title">Altri Progetti & Iniziative</h3>
+                    <p class="project-description">Eventi, verticali editoriali e iniziative speciali</p>
+                    
+                    <img src="eventi.png" alt="Portale Eventi" class="project-img">
+                    
+                    <p style="margin: 1.5rem 0 1rem; line-height: 1.7;"><strong>Highlights Portfolio:</strong></p>
+                    
+                    <ul style="list-style: none; padding: 0; margin-bottom: 1.5rem;">
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; line-height: 1.6;">
+                            <span style="position: absolute; left: 0; color: var(--primary); font-weight: 700;">→</span>
+                            <strong>Portale Eventi:</strong> Hub centralizzato per tutti gli eventi organizzati dal gruppo editoriale, con sistema di prenotazione integrato
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; line-height: 1.6;">
+                            <span style="position: absolute; left: 0; color: var(--primary); font-weight: 700;">→</span>
+                            <strong>Top Aziende:</strong> Verticale B2B dedicato alle eccellenze imprenditoriali del territorio, con classifiche e interviste
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; line-height: 1.6;">
+                            <span style="position: absolute; left: 0; color: var(--primary); font-weight: 700;">→</span>
+                            <strong>Guida TV:</strong> Restyling completo della guida televisiva digitale con filtri avanzati e palinsesto real-time
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; line-height: 1.6;">
+                            <span style="position: absolute; left: 0; color: var(--primary); font-weight: 700;">→</span>
+                            <strong>QS App & Sfogliatore:</strong> Sviluppo nuove app mobile per la lettura digitale del quotidiano
+                        </li>
+                        <li style="margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; line-height: 1.6;">
+                            <span style="position: absolute; left: 0; color: var(--primary); font-weight: 700;">→</span>
+                            <strong>82 Sezioni Web:</strong> In 3 anni, sviluppo di sezioni tematiche, pagine autori, video hub, e verticali editoriali (QN Salus, QN Itinerari, Luce!)
+                        </li>
+                    </ul>
+                    <div class="project-tags">
+                        <span class="tag">Multi-project</span>
+                        <span class="tag">WordPress</span>
+                        <span class="tag">DMDesk CMS</span>
+                        <span class="tag">Event Planning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section class="skills" id="skills">
+        <h2 class="section-title" style="text-align: center;">Competenze</h2>
+        
+        <div class="skills-container">
+            <div class="skill-category">
+                <div class="skill-icon">🎯</div>
+                <h3>Product & Project Management</h3>
+                <ul class="skill-list">
+                    <li>Product Strategy & Roadmap</li>
+                    <li>Agile/Scrum Methodologies</li>
+                    <li>Jira, Trello</li>
+                    <li>User Research & Testing</li>
+                    <li>A/B Testing & Optimization</li>
+                    <li>Stakeholder Management</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <div class="skill-icon">💻</div>
+                <h3>Technical Skills</h3>
+                <ul class="skill-list">
+                    <li>HTML/CSS (Intermedio)</li>
+                    <li>CMS: DMDesk, WordPress, Wix</li>
+                    <li>Figma, Canva</li>
+                    <li>Git Version Control</li>
+                    <li>API Integration</li>
+                    <li>Google Tag Manager</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <div class="skill-icon">📊</div>
+                <h3>Analytics & Marketing</h3>
+                <ul class="skill-list">
+                    <li>Google Analytics (GA4)</li>
+                    <li>Email Marketing (Piano ESP, Mailchimp)</li>
+                    <li>SEO/SEM (SEMRush, Yoast)</li>
+                    <li>Data Analysis & Reporting</li>
+                    <li>KPI Definition & Tracking</li>
+                    <li>Customer Journey Mapping</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <div class="skill-icon">✨</div>
+                <h3>Soft Skills</h3>
+                <ul class="skill-list">
+                    <li>Leadership & Team Coordination</li>
+                    <li>Cross-functional Collaboration</li>
+                    <li>Problem Solving</li>
+                    <li>Comunicazione Efficace</li>
+                    <li>Time Management</li>
+                    <li>Multilingual (IT, EN, RU, ES, DE)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact" id="contact">
+        <h2 class="section-title">Lavoriamo Insieme</h2>
+        <p>Sono sempre interessata a nuove opportunità nel Product Management, Digital Innovation e Media Technology.</p>
+        
+        <div class="contact-links">
+            <a href="mailto:rosanna.zotta@outlook.it" class="contact-link">📧 Email</a>
+            <a href="tel:+393491654768" class="contact-link">📱 Telefono</a>
+            <a href="https://linkedin.com/in/rosannazotta" class="contact-link" target="_blank">💼 LinkedIn</a>
+            <a href="Rosanna_Zotta_CV.pdf" class="contact-link" download>📄 Scarica CV</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Rosanna Zotta. Tutti i diritti riservati.</p>
+        <p>© 2025 Rosanna Zotta. Tutti i diritti riservati. Made with 💖</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-        // Navbar show on scroll
-        let lastScroll = 0;
-        const navbar = document.getElementById('navbar');
-        
+    <script>
+        // Header scroll effect
         window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            
-            if (currentScroll > 100) {
-                navbar.classList.add('visible');
+            const header = document.getElementById('header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
             } else {
-                navbar.classList.remove('visible');
+                header.classList.remove('scrolled');
             }
-            
-            lastScroll = currentScroll;
         });
 
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = documen
+        // Smooth reveal on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .skill-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'all 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
