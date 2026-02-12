@@ -281,19 +281,28 @@
             }
         }
 
-        .hero p {
-            font-size: clamp(1.2rem, 3vw, 1.8rem);
+        .hero .subtitle {
+            font-size: clamp(1.3rem, 3vw, 2rem);
+            margin-bottom: 2rem;
             color: var(--text);
-            margin-bottom: 3rem;
+            font-weight: 500;
+            animation: slideUp 1s ease-out 0.2s both;
+        }
+
+        .hero .description {
+            font-size: 1.2rem;
+            line-height: 1.8;
             max-width: 700px;
-            animation: slideUp 1s ease-out 0.2s backwards;
+            margin-bottom: 3rem;
+            opacity: 0.8;
+            animation: slideUp 1s ease-out 0.4s both;
         }
 
         .cta-buttons {
             display: flex;
             gap: 1.5rem;
             flex-wrap: wrap;
-            animation: slideUp 1s ease-out 0.4s backwards;
+            animation: slideUp 1s ease-out 0.6s both;
         }
 
         .btn {
@@ -576,17 +585,18 @@
             color: var(--primary);
         }
 
-        .contact .section-title {
-            background: linear-gradient(135deg, #FFD93D 0%, #FF6B9D 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        /* Contact Section */
+        .contact {
+            text-align: center;
+            padding: 5rem 2rem;
         }
 
         .contact p {
-            font-size: 1.3rem;
-            margin: 2rem 0 3rem;
-            opacity: 0.9;
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            opacity: 0.8;
         }
 
         .contact-links {
@@ -594,39 +604,49 @@
             justify-content: center;
             gap: 2rem;
             flex-wrap: wrap;
-            margin-top: 3rem;
         }
 
         .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             padding: 1.2rem 2.5rem;
-            background: rgba(255, 255, 255, 0.1);
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50px;
-            color: white;
+            background: white;
+            color: var(--text);
             text-decoration: none;
+            border-radius: 50px;
             font-weight: 600;
+            font-size: 1.1rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
         }
 
         .contact-link:hover {
-            background: white;
-            color: var(--dark);
             transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
+            background: var(--gradient-1);
+            color: white;
         }
 
         /* Footer */
         footer {
-            background: #0f0f1a;
-            color: rgba(255, 255, 255, 0.7);
-            padding: 2rem;
+            background: var(--dark);
+            color: white;
             text-align: center;
+            padding: 2.5rem;
+            font-size: 1rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
                 gap: 1.5rem;
+            }
+
+            .dropdown-content {
+                left: 0;
+                transform: translateX(0);
+                right: 0;
             }
 
             .hero {
@@ -698,23 +718,44 @@
             <div class="logo">RZ</div>
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
-                <li><a href="#work">Progetti</a></li>
+                <li class="dropdown">
+                    <a href="#work">
+                        Progetti
+                        <span class="dropdown-arrow">▼</span>
+                    </a>
+                    <div class="dropdown-content">
+                        <a href="https://www.quotidiano.net/oroscopo" target="_blank">Oroscopo</a>
+                        <a href="https://topaziende.quotidiano.net/" target="_blank">Top Aziende</a>
+                        <a href="https://www.quotidiano.net/eventi" target="_blank">Eventi</a>
+                        <a href="https://140anni.ilrestodelcarlino.it/" target="_blank">140 Anni Il Resto del Carlino</a>
+                        <a href="https://www.quotidiano.net/centro-notifiche" target="_blank">Centro Notifiche</a>
+                        <a href="https://www.quotidiano.net/luce/" target="_blank">Luce!</a>
+                        <a href="https://www.quotidiano.net/itinerari/" target="_blank">Itinerari</a>
+                        <a href="https://www.quotidiano.net/salute" target="_blank">Salute</a>
+                        <a href="https://guidatv.quotidiano.net/" target="_blank">Guida TV</a>
+                    </div>
+                </li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#contact">Contatti</a></li>
+                <li class="language-switcher">
+                    <button onclick="switchLanguage('it')" class="lang-btn active" data-lang="it">IT</button>
+                    <button onclick="switchLanguage('en')" class="lang-btn" data-lang="en">EN</button>
+                </li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="blob-1"></div>
-        <div class="blob-2"></div>
+    <section class="hero" id="about">
         <div class="hero-content">
-            <h1>Rosanna Zotta</h1>
-            <p>Digital Product Manager Junior che trasforma dati in decisioni strategiche e idee in prodotti scalabili 🚀</p>
+            <h1 data-it="Ciao, sono Rosanna 👋" data-en="Hi, I'm Rosanna 👋">Ciao, sono Rosanna 👋</h1>
+            <p class="subtitle" data-it="Digital Product Manager & Innovation Enthusiast" data-en="Digital Product Manager & Innovation Enthusiast">Digital Product Manager & Innovation Enthusiast</p>
+            <p class="description" data-it="Trasformo idee in prodotti digitali concreti. Con oltre 3 anni di esperienza nel settore editoriale digitale, mi occupo di gestione prodotto end-to-end, sviluppo web, ottimizzazione analytics e strategie data-driven per massimizzare engagement e crescita." data-en="I transform ideas into concrete digital products. With over 3 years of experience in digital publishing, I handle end-to-end product management, web development, analytics optimization, and data-driven strategies to maximize engagement and growth.">
+                Trasformo idee in prodotti digitali concreti. Con oltre 3 anni di esperienza nel settore editoriale digitale, mi occupo di gestione prodotto end-to-end, sviluppo web, ottimizzazione analytics e strategie data-driven per massimizzare engagement e crescita.
+            </p>
             <div class="cta-buttons">
-                <a href="#work" class="btn btn-primary">Vedi i Progetti</a>
-                <a href="#contact" class="btn btn-secondary">Contattami</a>
+                <a href="#contact" class="btn btn-primary" data-it="Parliamone" data-en="Let's Talk">Parliamone</a>
+                <a href="Rosanna_Zotta_CV.pdf" class="btn btn-secondary" download data-it="Scarica CV" data-en="Download CV">Scarica CV</a>
             </div>
         </div>
     </section>
@@ -1028,22 +1069,23 @@
 
     <!-- Contact Section -->
     <section class="contact" id="contact">
-        <h2 class="section-title">Lavoriamo Insieme</h2>
-        <p>Sono sempre interessata a nuove opportunità nel Product Management, Digital Innovation e Media Technology.</p>
+        <h2 class="section-title" data-it="Lavoriamo Insieme" data-en="Let's Work Together">Lavoriamo Insieme</h2>
+        <p data-it="Sono sempre interessata a nuove opportunità nel Product Management, Digital Innovation e Media Technology." data-en="I'm always interested in new opportunities in Product Management, Digital Innovation and Media Technology.">Sono sempre interessata a nuove opportunità nel Product Management, Digital Innovation e Media Technology.</p>
         
         <div class="contact-links">
-            <a href="mailto:rosanna.zotta@outlook.it" class="contact-link">📧 Email</a>
+            <a href="/cdn-cgi/l/email-protection#ed9f829e8c83838cc3978299998cad82989981828286c38499" class="contact-link">📧 Email</a>
+            <a href="tel:+393491654768" class="contact-link" data-it="📱 Telefono" data-en="📱 Phone">📱 Telefono</a>
             <a href="https://linkedin.com/in/rosannazotta" class="contact-link" target="_blank">💼 LinkedIn</a>
-                <a href="Rosanna_Zotta_CV.pdf" class="contact-link" download>📄 Il mio CV</a>
+            <a href="Rosanna_Zotta_CV.pdf" class="contact-link" download data-it="📄 Scarica CV" data-en="📄 Download CV">📄 Scarica CV</a>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Rosanna Zotta. Tutti i diritti riservati. Made with 💖</p>
+        <p data-it="© 2025 Rosanna Zotta. Tutti i diritti riservati. Made with 💖" data-en="© 2025 Rosanna Zotta. All rights reserved. Made with 💖">© 2025 Rosanna Zotta. Tutti i diritti riservati. Made with 💖</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
         // Language Switcher
         let currentLang = 'it';
@@ -1114,6 +1156,27 @@
             el.style.transition = 'all 0.6s ease-out';
             observer.observe(el);
         });
+
+        // Language Switcher
+        let currentLang = 'it';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Here you can add logic to change text content based on language
+            // For now, this is a placeholder for future implementation
+        }
     </script>
 </body>
 </html>
