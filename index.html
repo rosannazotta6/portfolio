@@ -1087,45 +1087,7 @@
 
     <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
     <script>
-        // Language Switcher
-        let currentLang = 'it';
-
-        function switchLanguage(lang) {
-            currentLang = lang;
-            
-            // Update active button
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.lang === lang) {
-                    btn.classList.add('active');
-                }
-            });
-
-            // Update HTML lang attribute
-            document.documentElement.lang = lang;
-
-            // Update all elements with data-it and data-en attributes
-            document.querySelectorAll('[data-it][data-en]').forEach(element => {
-                const text = element.getAttribute('data-' + lang);
-                if (text) {
-                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-                        element.placeholder = text;
-                    } else {
-                        element.innerHTML = text;
-                    }
-                }
-            });
-
-            // Update dropdown menu title
-            const dropdownLink = document.querySelector('.dropdown > a');
-            if (dropdownLink) {
-                const dropdownText = lang === 'it' ? 'Progetti' : 'Projects';
-                dropdownLink.childNodes[0].textContent = dropdownText + ' ';
-            }
-        }
-
-    <script>
-        // Header scroll effect
+         // Header scroll effect
         window.addEventListener('scroll', () => {
             const header = document.getElementById('header');
             if (window.scrollY > 100) {
@@ -1174,8 +1136,24 @@
             // Update HTML lang attribute
             document.documentElement.lang = lang;
 
-            // Here you can add logic to change text content based on language
-            // For now, this is a placeholder for future implementation
+            // Update all elements with data-it and data-en attributes
+            document.querySelectorAll('[data-it][data-en]').forEach(element => {
+                const text = element.getAttribute('data-' + lang);
+                if (text) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = text;
+                    } else {
+                        element.innerHTML = text;
+                    }
+                }
+            });
+
+            // Update dropdown menu title
+            const dropdownLink = document.querySelector('.dropdown > a span');
+            if (dropdownLink) {
+                const dropdownText = lang === 'it' ? 'Progetti' : 'Projects';
+                dropdownLink.textContent = dropdownText;
+            }
         }
     </script>
 </body>
