@@ -116,6 +116,99 @@
         .nav-links a:hover::after {
             width: 100%;
         }
+        /* Dropdown menu styling */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown > a {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .dropdown-arrow {
+            font-size: 0.7rem;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-content {
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            min-width: 250px;
+            box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12);
+            border-radius: 12px;
+            padding: 0.8rem 0;
+            margin-top: 1rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown:hover .dropdown-content {
+            opacity: 1;
+            visibility: visible;
+            margin-top: 0.5rem;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 0.8rem 1.5rem;
+            color: var(--text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .dropdown-content a:hover {
+            background: linear-gradient(90deg, rgba(255, 107, 157, 0.1) 0%, rgba(255, 160, 122, 0.1) 100%);
+            color: var(--primary);
+            padding-left: 2rem;
+        }
+
+        .dropdown-content a::after {
+            display: none;
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+            background: rgba(255, 107, 157, 0.1);
+            padding: 0.5rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .language-switcher button {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            padding: 0.3rem 0.8rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            font-family: 'DM Sans', sans-serif;
+        }
+
+        .language-switcher button.active {
+            background: var(--gradient-1);
+            color: white;
+        }
+
+        .language-switcher button:hover:not(.active) {
+            background: rgba(255, 107, 157, 0.2);
+        }
 
         /* Hero Section - POP STYLE */
         .hero {
@@ -462,31 +555,25 @@
             color: var(--dark);
         }
 
-        .skill-list {
+                .skill-list {
             list-style: none;
         }
 
         .skill-list li {
             padding: 0.7rem 0;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
             color: var(--text);
-            position: relative;
-            padding-left: 1.5rem;
+            font-size: 1rem;
+            transition: all 0.3s ease;
         }
 
-        .skill-list li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
+        .skill-list li:last-child {
+            border-bottom: none;
+        }
+
+        .skill-list li:hover {
+            padding-left: 1rem;
             color: var(--primary);
-            font-weight: 700;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 6rem 2rem;
-            background: var(--dark);
-            color: white;
-            text-align: center;
         }
 
         .contact .section-title {
@@ -955,6 +1042,45 @@
     <footer>
         <p>© 2025 Rosanna Zotta. Tutti i diritti riservati. Made with 💖</p>
     </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+    <script>
+        // Language Switcher
+        let currentLang = 'it';
+
+        function switchLanguage(lang) {
+            currentLang = lang;
+            
+            // Update active button
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+
+            // Update all elements with data-it and data-en attributes
+            document.querySelectorAll('[data-it][data-en]').forEach(element => {
+                const text = element.getAttribute('data-' + lang);
+                if (text) {
+                    if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                        element.placeholder = text;
+                    } else {
+                        element.innerHTML = text;
+                    }
+                }
+            });
+
+            // Update dropdown menu title
+            const dropdownLink = document.querySelector('.dropdown > a');
+            if (dropdownLink) {
+                const dropdownText = lang === 'it' ? 'Progetti' : 'Projects';
+                dropdownLink.childNodes[0].textContent = dropdownText + ' ';
+            }
+        }
 
     <script>
         // Header scroll effect
