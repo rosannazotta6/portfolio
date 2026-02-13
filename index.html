@@ -718,6 +718,43 @@
             font-size: 1rem;
         }
 
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(255, 107, 157, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 30px rgba(255, 107, 157, 0.6);
+        }
+
+        .back-to-top:active {
+            transform: translateY(-2px);
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .nav-links {
@@ -744,6 +781,14 @@
 
             .projects-grid {
                 grid-template-columns: 1fr;
+            }
+
+            .back-to-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
             }
         }
 
@@ -1118,6 +1163,7 @@
                     <li>Git Version Control</li>
                     <li>API Integration</li>
                     <li>Google Tag Manager</li>
+                    <li>Vibe Coding</li>
                 </ul>
             </div>
 
@@ -1160,6 +1206,9 @@
             <a href="Rosanna_Zotta_CV.pdf" class="contact-link" download data-it="📄 Scarica CV" data-en="📄 Download CV">📄 Scarica CV</a>
         </div>
     </section>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
 
     <!-- Footer -->
     <footer>
@@ -1220,7 +1269,9 @@
 
         // Aspetta che il DOM sia completamente caricato
         document.addEventListener('DOMContentLoaded', function() {
-            // Header scroll effect
+            // Back to Top Button functionality
+            const backToTopButton = document.getElementById('backToTop');
+            
             window.addEventListener('scroll', () => {
                 const header = document.getElementById('header');
                 if (window.scrollY > 100) {
@@ -1228,6 +1279,21 @@
                 } else {
                     header.classList.remove('scrolled');
                 }
+
+                // Show/hide back to top button
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            // Click event for back to top
+            backToTopButton.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
 
             // Smooth reveal on scroll
