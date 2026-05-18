@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IRC Poll Widget</title>
+</head>
+<body style="margin:0;padding:16px;background:#fff;">
+
+<style>
+:root{--blue:#4F9EFF;--dark:#1C3799;--bg:#F5F8FB;--card:#E8F2FF;--border:#D6E8FF}
+*{box-sizing:border-box;font-family:system-ui,sans-serif;margin:0;padding:0}
+
+/* WIDGET */
+.widget{background:var(--bg);border-radius:12px;border:1px solid var(--border);padding:18px 20px 20px;max-width:560px}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--dark);color:#fff;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:4px 10px;border-radius:4px;margin-bottom:9px}
+.badge svg{width:11px;height:11px;fill:#fff}
+.w-intro{font-size:12px;color:var(--blue);font-weight:600;margin-bottom:7px}
+.w-title{font-size:18px;font-weight:700;color:var(--dark);margin-bottom:20px;line-height:1.25}
+.bubble-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px;align-items:end}
+.bubble-wrap{display:flex;flex-direction:column;align-items:center;transition:transform .15s ease,opacity .15s ease;transform-origin:bottom center}
+.bubble-card{border-radius:12px;padding:14px 15px;width:100%;min-height:116px;position:relative;transition:background .15s,color .15s,box-shadow .15s}
+.bubble-card::after{content:'';position:absolute;bottom:-11px;width:0;height:0;border-left:11px solid transparent;border-right:11px solid transparent;transition:border-top-color .15s}
+.bubble-wrap.left .bubble-card::after{left:22px;border-top:12px solid var(--card)}
+.bubble-wrap.right .bubble-card::after{right:22px;border-top:12px solid var(--card)}
+.bubble-card h3{font-size:14px;font-weight:700;margin-bottom:6px;line-height:1.25;transition:color .15s}
+.bubble-card p{font-size:12px;line-height:1.55;transition:color .15s}
+.slider-row{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.slider-icon{width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;transition:transform .15s,border-color .15s}
+.slider-icon.active{border-color:var(--dark);transform:scale(1.12)}
+.s-wrap{position:relative;height:28px;display:flex;align-items:center;flex:1}
+.s-track{position:absolute;left:0;right:0;height:4px;background:#C3D9F8;border-radius:2px}
+.s-fill{position:absolute;left:0;height:4px;background:linear-gradient(to right,var(--dark),var(--blue));border-radius:2px;width:50%;transition:width .05s}
+input[type=range].rng{position:relative;z-index:2;width:100%;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
+input[type=range].rng::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--dark);border:3px solid #fff;box-shadow:0 0 0 2px var(--blue);cursor:pointer;transition:transform .15s}
+input[type=range].rng:hover::-webkit-slider-thumb{transform:scale(1.15)}
+input[type=range].rng::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--dark);border:3px solid #fff;box-shadow:0 0 0 2px var(--blue)}
+.s-hint{text-align:center;font-size:12px;color:#8aa3c8;margin-bottom:14px;min-height:18px}
+.s-hint.on{color:var(--dark);font-weight:600}
+.w-cta{width:100%;background:var(--dark);color:#fff;border:none;border-radius:9px;padding:13px 16px;font-family:system-ui;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s}
+.w-cta:hover{background:#162d85}
+
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;z-index:100;background:rgba(28,55,153,.2);backdrop-filter:blur(2px);align-items:flex-start;justify-content:center;padding:16px;overflow-y:auto}
+.overlay.open{display:flex}
+.modal{background:#fff;border-radius:14px;width:100%;max-width:540px;overflow:hidden;border:1.5px solid var(--border);margin:auto}
+.m-header{display:flex;align-items:center;justify-content:space-between;padding:12px 18px 11px;border-bottom:1px solid var(--border);background:#fff;position:sticky;top:0;z-index:10}
+.m-brand{display:flex;align-items:center;gap:7px}
+.m-brand-dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.m-brand-label{font-size:13px;font-weight:700;color:var(--dark)}
+.m-close{background:none;border:1px solid var(--border);border-radius:6px;width:30px;height:30px;cursor:pointer;display:flex;align-items:center;justify-content:center;color:#8aa3c8;font-size:15px;transition:all .15s}
+.m-close:hover{border-color:var(--dark);color:var(--dark)}
+.m-progress-bar{height:3px;background:var(--card)}
+.m-progress-fill{height:3px;background:var(--blue);transition:width .3s ease}
+.m-body{padding:20px 20px 14px}
+.m-step-label{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:11px}
+.m-footer{display:flex;align-items:center;gap:8px;padding:12px 20px 18px;border-top:1px solid var(--border)}
+.btn-back{background:none;border:1px solid var(--border);border-radius:8px;padding:10px 16px;font-family:system-ui;font-size:14px;font-weight:600;color:#8aa3c8;cursor:pointer;transition:all .15s;white-space:nowrap}
+.btn-back:hover{border-color:var(--dark);color:var(--dark)}
+.btn-next{flex:1;background:var(--dark);color:#fff;border:none;border-radius:8px;padding:12px 16px;font-family:system-ui;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s}
+.btn-next:hover{background:#162d85}
+
+/* QUADRANT */
+.quad-outer{margin-bottom:8px}
+.quad-top-labels{display:flex;justify-content:space-around;margin-bottom:5px}
+.quad-top-label{font-size:12px;color:#4a5568;font-weight:600;display:flex;align-items:center;gap:4px}
+.quad-box{position:relative;border-radius:8px;overflow:hidden;border:1px solid #e2e8f0}
+.quad-canvas{width:100%;padding-bottom:55%;position:relative}
+.quad-q1,.quad-q2,.quad-q3,.quad-q4{position:absolute;width:50%;height:50%;background:#eef3fb}
+.quad-q1{top:0;left:0;border-right:1px dashed #c8d8f0;border-bottom:1px dashed #c8d8f0}
+.quad-q2{top:0;right:0;border-bottom:1px dashed #c8d8f0}
+.quad-q3{bottom:0;left:0;border-right:1px dashed #c8d8f0}
+.quad-q4{bottom:0;right:0}
+.quad-axis-r{position:absolute;right:8px;top:0;bottom:0;display:flex;flex-direction:column;justify-content:space-between;padding:6px 0;pointer-events:none}
+.quad-axis-r span{font-size:9px;color:#94a3b8;writing-mode:vertical-rl;letter-spacing:.5px}
+.quad-dot{position:absolute;border-radius:50%;transform:translate(-50%,-50%);transition:left .5s cubic-bezier(.34,1.56,.64,1),top .5s cubic-bezier(.34,1.56,.64,1)}
+.quad-dot.initial{width:13px;height:13px;background:#94a3b8;border:2.5px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.15)}
+.quad-dot.final{width:17px;height:17px;background:var(--dark);border:3px solid #fff;box-shadow:0 0 0 2.5px var(--blue)}
+.quad-legend{display:flex;gap:16px;font-size:11px;color:#4a5568;margin-top:7px;margin-bottom:14px}
+.quad-legend-item{display:flex;align-items:center;gap:5px}
+.quad-legend-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+
+/* QUESTION */
+.q-label-sm{font-size:12px;color:var(--blue);font-weight:600;margin-bottom:8px}
+.q-title{font-size:16px;font-weight:700;color:#111;margin-bottom:10px;line-height:1.3}
+.q-body-box{font-size:13px;color:#4a5568;line-height:1.65;margin-bottom:16px;padding:11px 14px;background:var(--bg);border-radius:8px;border-left:3px solid var(--border)}
+.q-s-labels{display:flex;justify-content:space-between;font-size:11px;color:#8aa3c8;font-weight:600;text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px}
+.q-s-wrap{position:relative;height:30px;display:flex;align-items:center}
+.q-s-track{position:absolute;left:0;right:0;height:4px;background:#C3D9F8;border-radius:2px}
+.q-s-fill{position:absolute;left:0;height:4px;background:linear-gradient(to right,var(--dark),var(--blue));border-radius:2px;transition:width .05s}
+input[type=range].qrng{position:relative;z-index:2;width:100%;-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer}
+input[type=range].qrng::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:var(--dark);border:3px solid #fff;box-shadow:0 0 0 2px var(--blue);cursor:pointer}
+input[type=range].qrng::-moz-range-thumb{width:22px;height:22px;border-radius:50%;background:var(--dark);border:3px solid #fff;box-shadow:0 0 0 2px var(--blue)}
+
+/* RESULTS */
+.res-finish{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.res-check{width:38px;height:38px;border-radius:50%;background:#22c55e;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.res-check svg{width:20px;height:20px;stroke:#fff;fill:none;stroke-width:2.5}
+.res-finish-title{font-size:19px;font-weight:700;color:var(--dark)}
+.res-section-title{font-size:11px;font-weight:700;color:#8aa3c8;text-transform:uppercase;letter-spacing:.8px;margin-bottom:10px}
+.res-summary{font-size:14px;color:#222;line-height:1.6;text-align:center;padding:12px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:16px}
+
+/* BEST ARG CARDS — full width stacked like reference */
+.best-arg-stack{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.arg-card{background:#fff;border-radius:10px;border:1px solid var(--border);border-left:4px solid var(--dark);overflow:hidden}
+.arg-card.right-side{border-left-color:var(--blue)}
+.arg-card-head{display:flex;align-items:center;gap:8px;padding:10px 14px 8px}
+.arg-card-icon{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.arg-card-icon.left-ico{background:#dde9ff}
+.arg-card-icon.right-ico{background:var(--card)}
+.arg-card-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:#8aa3c8}
+.arg-card-label strong{color:var(--dark)}
+.arg-card-body{padding:0 14px 12px}
+.arg-card-quote{font-size:13px;color:#1a202c;line-height:1.55;margin-bottom:10px;font-style:italic}
+.arg-card-quote::before{content:'"';font-size:16px;color:var(--blue);font-style:normal;margin-right:1px}
+.arg-card-quote::after{content:'"';font-size:16px;color:var(--blue);font-style:normal;margin-left:1px}
+.arg-slider-row{display:flex;align-items:center;gap:8px}
+.arg-slider-label{font-size:11px;color:#8aa3c8;min-width:120px}
+.arg-slider-track{flex:1;height:4px;background:#C3D9F8;border-radius:2px;overflow:hidden}
+.arg-slider-fill{height:4px;border-radius:2px;background:var(--dark)}
+.arg-card.right-side .arg-slider-fill{background:var(--blue)}
+.arg-slider-pct{font-size:11px;color:var(--dark);font-weight:700;min-width:28px;text-align:right}
+
+/* AGREE METER */
+.agree-card{background:#fff;border-radius:10px;border:1px solid var(--border);border-left:4px solid var(--blue);padding:12px 14px;margin-bottom:14px}
+.agree-card-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.agree-card-icon{width:28px;height:28px;border-radius:50%;background:var(--card);display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+.agree-card-text{font-size:13px;color:#4a5568;line-height:1.45}
+.agree-card-text strong{color:var(--dark)}
+.agree-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.agree-bar-icon{font-size:16px}
+.agree-bar-track{flex:1;height:6px;background:#C3D9F8;border-radius:3px;overflow:hidden}
+.agree-bar-fill{height:6px;border-radius:3px;background:var(--blue);transition:width .6s ease}
+.agree-bar-txt{font-size:12px;color:#4a5568;min-width:28px;text-align:right;font-weight:600}
+
+/* ACCORDION */
+.acc-section-hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.acc-toggle{background:none;border:1px solid var(--border);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--dark);font-weight:600;cursor:pointer;transition:all .15s}
+.acc-toggle:hover{background:var(--card)}
+.acc-list{position:relative;padding-left:22px}
+.acc-list::before{content:'';position:absolute;left:14px;top:14px;bottom:14px;width:2px;background:var(--border)}
+.acc-item{position:relative;margin-bottom:8px}
+.acc-head{display:flex;align-items:flex-start;gap:11px;padding:11px 12px 11px 0;cursor:pointer}
+.acc-head:hover .acc-title{color:var(--dark)}
+.acc-dot{width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid var(--blue);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;position:relative;z-index:1}
+.acc-dot-inner{width:11px;height:11px;border-radius:50%;background:var(--blue)}
+.acc-head-text{flex:1}
+.acc-title{font-size:13px;font-weight:700;color:#111;line-height:1.35;margin-bottom:4px;transition:color .15s}
+.acc-badge{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;padding:2px 8px;border-radius:4px;background:var(--card);color:var(--dark)}
+.acc-chevron{font-size:12px;color:#8aa3c8;flex-shrink:0;transition:transform .2s;padding-top:3px}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.acc-body.open{max-height:320px}
+.acc-body-inner{padding:0 0 12px 39px;font-size:13px;color:#4a5568;line-height:1.65}
+.acc-mini{margin-top:9px}
+.acc-mini-track{height:3px;background:#C3D9F8;border-radius:2px;margin-bottom:3px}
+.acc-mini-fill{height:3px;border-radius:2px;background:var(--blue)}
+.acc-mini-labels{display:flex;justify-content:space-between;font-size:10px;color:#8aa3c8}
+
+/* SHARE */
+.share-row{display:flex;gap:8px;margin-bottom:4px}
+.share-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;border:1px solid var(--border);border-radius:8px;padding:10px 12px;background:#fff;cursor:pointer;font-size:13px;font-weight:600;color:var(--dark);transition:all .15s}
+.share-btn:hover{background:var(--card);border-color:var(--blue)}
+.share-btn svg{width:15px;height:15px;stroke:var(--dark);fill:none;stroke-width:2}
+.share-toast{font-size:12px;color:#22c55e;text-align:center;min-height:18px;margin-top:4px;font-weight:600}
+.res-close-btn{width:100%;background:var(--dark);color:#fff;border:none;border-radius:9px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;transition:background .15s;margin-top:14px}
+.res-close-btn:hover{background:#162d85}
+</style>
+
+<div class="widget">
+  <div class="badge"><svg viewBox="0 0 12 12"><path d="M1 10h2V6H1v4zm3 0h2V3H4v7zm3 0h2V1H7v9z"/></svg>Sondaggio</div>
+  <p class="w-intro">Dicci la tua — ci vuole 10 secondi</p>
+  <p class="w-title">Dove ti posizioni su questo tema?</p>
+  <div class="bubble-row">
+    <div class="bubble-wrap left" id="bwrap-l">
+      <div class="bubble-card" id="bcard-l">
+        <h3>Direzione di Villa Pineta</h3>
+        <p>La cura diventa più umana e terapeutica se parla il linguaggio del territorio.</p>
+      </div>
+    </div>
+    <div class="bubble-wrap right" id="bwrap-r">
+      <div class="bubble-card" id="bcard-r">
+        <h3>Scettici pragmatici</h3>
+        <p>Vale solo se non sostituisce personale, sicurezza e cura concreta.</p>
+      </div>
+    </div>
+  </div>
+  <div class="slider-row">
+    <div class="slider-icon" id="icon-l">🏠</div>
+    <div class="s-wrap"><div class="s-track"></div><div class="s-fill" id="wfill"></div><input type="range" class="rng" min="0" max="100" value="50" id="wslider"></div>
+    <div class="slider-icon" id="icon-r">👥</div>
+  </div>
+  <div class="s-hint" id="whint">Trascina il cursore per scegliere la tua posizione</div>
+  <button class="w-cta" id="wbtn">Vota e scopri i risultati →</button>
+</div>
+
+<div class="overlay" id="overlay">
+  <div class="modal">
+    <div class="m-header">
+      <div class="m-brand"><div class="m-brand-dot"></div><div class="m-brand-label">Sondaggio interattivo</div></div>
+      <button class="m-close" id="closeBtn">✕</button>
+    </div>
+    <div class="m-progress-bar"><div class="m-progress-fill" id="progressFill" style="width:0%"></div></div>
+    <div class="m-body" id="mBody"></div>
+    <div class="m-footer" id="mFooter">
+      <button class="btn-back" id="btnBack">← Indietro</button>
+      <button class="btn-next" id="btnNext">Continua →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const QS=[
+  {type:'intro'},
+  {type:'q',label:'Affermazione 1 di 4',side:'left',title:'Nomi e richiami del Frignano non sono arredo: sono strumenti di orientamento quotidiano.',body:'Per molti anziani fragili, un riferimento familiare aiuta a capire dove si trovano. Le linee guida dementia-friendly indicano che personalizzazione e landmarks migliorano orientamento e riconoscimento degli spazi.'},
+  {type:'q',label:'Affermazione 2 di 4',side:'right',title:'Nomi e scenografie aiutano, ma da soli non fanno buona assistenza.',body:'Gli ambienti familiari riducono disorientamento e ansia. Ma la buona assistenza si misura su cure continue, sicurezza e attenzione personale.'},
+  {type:'q',label:'Affermazione 3 di 4',side:'left',title:'Un ambiente che richiama casa e memoria sostiene umore, relazioni e senso di identità.',body:'Quando un luogo richiama paesaggi e simboli conosciuti, la struttura appare meno anonima. Familiarità e cue visivi sostengono identità, autonomia e relazione.'},
+  {type:'q',label:'Affermazione 4 di 4',side:'right',title:'Con ospiti molto anziani e fragili, il fattore decisivo resta il personale stabile e preparato.',body:'Contano continuità assistenziale, prevenzione delle cadute e ascolto quotidiano. Senza operatori stabili e formati, l\'allestimento tematico perde forza.'},
+  {type:'results'}
+];
+let step=0;const sv=new Array(QS.length).fill(50);let wVal=50;
+const overlay=document.getElementById('overlay'),mBody=document.getElementById('mBody'),mFooter=document.getElementById('mFooter'),progressFill=document.getElementById('progressFill'),btnBack=document.getElementById('btnBack'),btnNext=document.getElementById('btnNext');
+const hints=[[0,15,'Completamente con Villa Pineta'],[15,35,'Prevalentemente con Villa Pineta'],[35,45,'Leggermente verso Villa Pineta'],[45,55,'Posizione neutrale'],[55,65,'Leggermente verso gli Scettici'],[65,85,'Prevalentemente con gli Scettici'],[85,101,'Completamente con gli Scettici']];
+
+function lerpColor(a,b,t){
+  const ah=a.replace('#',''),bh=b.replace('#','');
+  const ar=parseInt(ah.slice(0,2),16),ag=parseInt(ah.slice(2,4),16),ab2=parseInt(ah.slice(4,6),16);
+  const br=parseInt(bh.slice(0,2),16),bg=parseInt(bh.slice(2,4),16),bb=parseInt(bh.slice(4,6),16);
+  return`rgb(${Math.round(ar+(br-ar)*t)},${Math.round(ag+(bg-ag)*t)},${Math.round(ab2+(bb-ab2)*t)})`;
+}
+function updateTails(lC,rC){
+  let s=document.getElementById('tail-style');
+  if(!s){s=document.createElement('style');s.id='tail-style';document.head.appendChild(s);}
+  s.textContent=`.bubble-wrap.left .bubble-card::after{border-top-color:${lC}!important}.bubble-wrap.right .bubble-card::after{border-top-color:${rC}!important}`;
+}
+function updateBubbles(v){
+  const t=v/100;
+  const scaleL=0.88+((1-t)*0.22),scaleR=0.88+(t*0.22);
+  const opL=(0.65+(1-t)*0.35).toFixed(3),opR=(0.65+t*0.35).toFixed(3);
+  document.getElementById('bwrap-l').style.cssText=`transform:scale(${scaleL.toFixed(3)});opacity:${opL}`;
+  document.getElementById('bwrap-r').style.cssText=`transform:scale(${scaleR.toFixed(3)});opacity:${opR}`;
+  const distL=Math.max(0,(0.5-t)/0.5),distR=Math.max(0,(t-0.5)/0.5);
+  const lBg=lerpColor('#E8F2FF','#1C3799',distL*0.85),rBg=lerpColor('#E8F2FF','#1C3799',distR*0.85);
+  const cardL=document.getElementById('bcard-l'),cardR=document.getElementById('bcard-r');
+  cardL.style.background=lBg; cardR.style.background=rBg;
+  const txL=distL>0.35?'#fff':'#1C3799',txR=distR>0.35?'#fff':'#1C3799';
+  [cardL.querySelector('h3'),cardL.querySelector('p')].forEach((el,i)=>{if(el)el.style.color=i===0?txL:distL>0.35?'rgba(255,255,255,.82)':txL;});
+  [cardR.querySelector('h3'),cardR.querySelector('p')].forEach((el,i)=>{if(el)el.style.color=i===0?txR:distR>0.35?'rgba(255,255,255,.82)':txR;});
+  updateTails(lBg,rBg);
+  document.getElementById('icon-l').className='slider-icon'+(t<0.45?' active':'');
+  document.getElementById('icon-r').className='slider-icon'+(t>0.55?' active':'');
+}
+
+document.getElementById('wslider').addEventListener('input',function(){
+  wVal=+this.value;
+  document.getElementById('wfill').style.width=wVal+'%';
+  const h=hints.find(([a,b])=>wVal>=a&&wVal<b);
+  const hint=document.getElementById('whint');
+  hint.textContent=h?h[2]:'';hint.className='s-hint on';
+  updateBubbles(wVal);
+});
+updateBubbles(50);updateTails('#E8F2FF','#E8F2FF');
+
+document.getElementById('wbtn').addEventListener('click',()=>{step=0;renderStep();overlay.classList.add('open');});
+document.getElementById('closeBtn').addEventListener('click',()=>overlay.classList.remove('open'));
+
+function getPosLabel(v){if(v<25)return'Direzione di Villa Pineta';if(v<45)return'Prevalentemente Villa Pineta';if(v<=55)return'Posizione neutrale';if(v<=75)return'Prevalentemente Scettici';return'Scettici pragmatici';}
+function buildQuad(dots){const dh=dots.map(d=>`<div class="quad-dot ${d.cls}" style="left:${d.x}%;top:${d.y}%"></div>`).join('');return`<div class="quad-top-labels"><div class="quad-top-label">🏠 <span>Villa Pineta</span></div><div class="quad-top-label">👥 <span>Scettici</span></div></div><div class="quad-box"><div class="quad-canvas"><div class="quad-q1"></div><div class="quad-q2"></div><div class="quad-q3"></div><div class="quad-q4"></div><div class="quad-axis-r"><span>Fortemente</span><span>Lievemente</span></div>${dh}</div></div>`;}
+
+function argCard(side,icon,q,val){
+  const isL=side==='left';
+  const pct=Math.round(val);
+  const label=isL?'La motivazione con cui sei stato più d\'accordo di':'La motivazione con cui sei stato più d\'accordo di';
+  const who=isL?'🏠 Direzione di Villa Pineta':'👥 Scettici pragmatici';
+  return`<div class="arg-card${isL?'':' right-side'}">
+    <div class="arg-card-head">
+      <div class="arg-card-icon ${isL?'left-ico':'right-ico'}">${icon}</div>
+      <div class="arg-card-label">${label} <strong>${who}</strong></div>
+    </div>
+    <div class="arg-card-body">
+      <div class="arg-card-quote">${q.title}</div>
+      <div class="arg-slider-row">
+        <div class="arg-slider-label">Fortemente in disaccordo</div>
+        <div class="arg-slider-track"><div class="arg-slider-fill" style="width:${pct}%"></div></div>
+        <div class="arg-slider-pct" style="color:${isL?'var(--dark)':'var(--blue)'}">${pct}%</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderStep(){
+  const q=QS[step];const total=QS.length-1;
+  progressFill.style.width=(step===0?0:step>=total?100:Math.round((step/total)*100))+'%';
+  btnBack.style.display=step===0?'none':'';
+  mFooter.style.display=q.type==='results'?'none':'';
+
+  if(q.type==='intro'){
+    const xI=wVal,yI=wVal>60||wVal<40?32:62;
+    mBody.innerHTML=`<div class="m-step-label">Stai per iniziare · 4 domande</div><div class="res-finish" style="margin-bottom:14px"><div class="res-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="res-finish-title">Ottimo inizio!</div><div style="font-size:13px;color:#4a5568;margin-top:3px">Hai riconosciuto la tua posizione. Ora verifica se regge di fronte alle argomentazioni.</div></div></div><div class="quad-outer">${buildQuad([{cls:'initial',x:xI,y:yI}])}</div><div class="quad-legend"><div class="quad-legend-item"><div class="quad-legend-dot" style="background:#94a3b8"></div><span>Il tuo punto di partenza</span></div></div>`;
+    btnNext.textContent='Inizia le domande →';
+  } else if(q.type==='q'){
+    mBody.innerHTML=`<div class="m-step-label">${q.label}</div><p class="q-label-sm">Valuta questa affermazione — sei d'accordo?</p><h2 class="q-title">${q.title}</h2><div class="q-body-box">${q.body}</div><div class="q-s-labels"><span>In disaccordo</span><span>D'accordo</span></div><div class="q-s-wrap"><div class="q-s-track"></div><div class="q-s-fill" id="qfill" style="width:${sv[step]}%"></div><input type="range" class="qrng" min="0" max="100" value="${sv[step]}" id="qslider"></div>`;
+    btnNext.textContent=step===total?'Vedi i risultati →':'Continua →';
+    document.getElementById('qslider').addEventListener('input',function(){sv[step]=+this.value;document.getElementById('qfill').style.width=this.value+'%';});
+  } else {
+    const li=QS.map((q,i)=>q.side==='left'?i:null).filter(i=>i!==null);
+    const ri=QS.map((q,i)=>q.side==='right'?i:null).filter(i=>i!==null);
+    const avg=Math.round(sv.slice(1,5).reduce((a,b)=>a+b,0)/4);
+    const xI=wVal,yI=wVal>60||wVal<40?32:62,xF=avg,yF=avg>60||avg<40?25:55;
+    const fl=getPosLabel(avg);const sh=Math.abs(avg-wVal)>8;const sd=avg>wVal?'verso gli Scettici':'verso Villa Pineta';
+    const bL=li.reduce((b,i)=>sv[i]>sv[b]?i:b,li[0]);
+    const bR=ri.reduce((b,i)=>sv[i]>sv[b]?i:b,ri[0]);
+    const lA=li.filter(i=>sv[i]>60).length;const rA=ri.filter(i=>sv[i]>60).length;
+    const acc=QS.filter(q=>q.type==='q').map((q,qi)=>{const r=qi+1;const sl=q.side==='left'?'Direzione di Villa Pineta':'Scettici pragmatici';return`<div class="acc-item"><div class="acc-head" onclick="toggleAcc(${qi})"><div class="acc-dot"><div class="acc-dot-inner"></div></div><div class="acc-head-text"><div class="acc-title">${q.title}</div><div class="acc-badge">${sl}</div></div><div class="acc-chevron" id="chev-${qi}">▾</div></div><div class="acc-body" id="acc-body-${qi}"><div class="acc-body-inner"><p>${q.body}</p><div class="acc-mini"><div class="acc-mini-track"><div class="acc-mini-fill" style="width:${sv[r]}%"></div></div><div class="acc-mini-labels"><span>In disaccordo</span><span>D'accordo</span></div></div></div></div></div>`;}).join('');
+
+    mBody.innerHTML=`
+      <div class="res-finish"><div class="res-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div><div class="res-finish-title">Hai finito!</div><div style="font-size:13px;color:#4a5568;margin-top:2px">Posizione finale: <strong>${fl}</strong></div></div></div>
+      <div class="res-section-title">La tua posizione</div>
+      <div class="quad-outer">${buildQuad([{cls:'initial',x:xI,y:yI},{cls:'final',x:xF,y:yF}])}</div>
+      <div class="quad-legend" style="margin-bottom:14px"><div class="quad-legend-item"><div class="quad-legend-dot" style="background:#94a3b8"></div><span>La tua posizione iniziale</span></div><div class="quad-legend-item"><div class="quad-legend-dot" style="background:var(--dark)"></div><span>Dopo aver esplorato le motivazioni</span></div></div>
+      <div class="res-summary">${sh?`Ti sei spostato <strong>${sd}</strong> dopo aver esplorato le argomentazioni.`:'La tua posizione è rimasta coerente con il punto di partenza.'}</div>
+      <div class="best-arg-stack">${argCard('left','🏠',QS[bL],sv[bL])}${argCard('right','👥',QS[bR],sv[bR])}</div>
+      <div class="agree-card">
+        <div class="agree-card-head">
+          <div class="agree-card-icon">📊</div>
+          <div class="agree-card-text">Sei stato d'accordo con <strong>${lA}/${li.length}</strong> motivazioni di 🏠 Direzione di Villa Pineta, e <strong>${rA}/${ri.length}</strong> di 👥 Scettici pragmatici</div>
+        </div>
+        <div class="agree-bar-row"><span class="agree-bar-icon">🏠</span><div class="agree-bar-track"><div class="agree-bar-fill" style="width:${Math.round(lA/li.length*100)}%"></div></div><div class="agree-bar-txt">${lA}/${li.length}</div></div>
+        <div class="agree-bar-row"><span class="agree-bar-icon">👥</span><div class="agree-bar-track"><div class="agree-bar-fill" style="width:${Math.round(rA/ri.length*100)}%"></div></div><div class="agree-bar-txt">${rA}/${ri.length}</div></div>
+      </div>
+      <div class="acc-section-hd"><div class="res-section-title" style="margin:0">Tutte le tue risposte</div><button class="acc-toggle" id="expandAll" onclick="toggleAll()">Espandi tutto</button></div>
+      <div class="acc-list">${acc}</div>
+      <div style="margin-top:18px"><div class="res-section-title">Condividi</div><div class="share-row"><button class="share-btn" onclick="shareMap()"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><circle cx="17.5" cy="17.5" r="2.5"/></svg>Condividi la mappa</button><button class="share-btn" onclick="shareResults()"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>Condividi i risultati</button></div><div class="share-toast" id="shareToast"></div></div>
+      <button class="res-close-btn" id="resClose">Torna all'articolo</button><div style="height:4px"></div>`;
+    document.getElementById('resClose').addEventListener('click',()=>overlay.classList.remove('open'));
+    window._sd={fl,sh,sd,lA,rA,lt:li.length,rt:ri.length};window._expandedAll=false;
+  }
+}
+window.toggleAcc=function(i){const b=document.getElementById('acc-body-'+i);const c=document.getElementById('chev-'+i);c.style.transform=b.classList.toggle('open')?'rotate(180deg)':'rotate(0deg)';};
+window.toggleAll=function(){window._expandedAll=!window._expandedAll;document.querySelectorAll('.acc-body').forEach(b=>b.classList[window._expandedAll?'add':'remove']('open'));document.querySelectorAll('.acc-chevron').forEach(c=>c.style.transform=window._expandedAll?'rotate(180deg)':'rotate(0deg)');document.getElementById('expandAll').textContent=window._expandedAll?'Comprimi tutto':'Espandi tutto';};
+function tryShare(text){const t=document.getElementById('shareToast');if(navigator.share){navigator.share({text,url:location.href}).catch(()=>{});}else{navigator.clipboard.writeText(text).then(()=>{t.textContent='✓ Testo copiato negli appunti';setTimeout(()=>{t.textContent='';},3000);});}}
+window.shareMap=function(){const d=window._sd||{};tryShare(`Ho risposto al sondaggio del Resto del Carlino. Posizione finale: ${d.fl||'—'}. ${d.sh?`Mi sono spostato ${d.sd}.`:''}`)};
+window.shareResults=function(){const d=window._sd||{};tryShare(`Sondaggio il Resto del Carlino — I simboli del Frignano.\nPosizione: ${d.fl||'—'}.\nD'accordo con ${d.lA||0}/${d.lt||2} argomenti Villa Pineta e ${d.rA||0}/${d.rt||2} Scettici.\nhttps://test.ilrestodelcarlino.it/modena/cronaca/i-simboli-naturalistici-del-frignano-3fcae268`);};
+btnNext.addEventListener('click',()=>{if(step<QS.length-1){step++;renderStep();}});
+btnBack.addEventListener('click',()=>{if(step>0){step--;renderStep();}});
+</script>
+
+</body>
+</html>
