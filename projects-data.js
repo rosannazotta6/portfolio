@@ -240,7 +240,7 @@ const PROJECTS = [
     },
     metric: { value: "26K", label: { it: "Pageviews", en: "Pageviews" } },
     stats: [
-      { value: "26K", label: { it: "Pageviews", en: "Pageviews" } },
+      { value: "1.5M+", label: { it: "Pageviews", en: "Pageviews" } },
       { value: "58%", label: { it: "Click Ratio", en: "Click Ratio" } },
       { value: "18%", label: { it: "Scroll Depth", en: "Scroll Depth" } },
       { value: "13s", label: { it: "View Time", en: "View Time" } }
@@ -254,8 +254,8 @@ const PROJECTS = [
       en: "End-to-end management: market analysis and competitive benchmarking, content strategy and user flow definition, UX/UI design with custom daily article format, dedicated DMDesk CMS components, automated daily update system."
     },
     impact: {
-      it: "In 12 mesi: 26.169 pageviews annuali da sezione precedentemente inattiva, click ratio del 58% (audience altamente engaged), 18% scroll depth con 13s di view time medio. Il progetto è diventato case study interno per lo sviluppo di nuove sezioni verticali.",
-      en: "Over 12 months: 26,169 annual pageviews from a previously inactive section, 58% click ratio (highly engaged audience), 18% scroll depth and 13s average view time. Internal case study for new vertical sections."
+      it: "In 12 mesi: 1,5 milioni di pageviews annuali da sezione precedentemente inattiva, click ratio del 58% (audience altamente engaged), 18% scroll depth con 13s di view time medio. Il progetto è diventato case study interno per lo sviluppo di nuove sezioni verticali.",
+      en: "Over 12 months: over 1,5 million annual pageviews from a previously inactive section, 58% click ratio (highly engaged audience), 18% scroll depth and 13s average view time. Internal case study for new vertical sections."
     },
     image: GH_BASE + "oroscopo.png",
     tags: ["Product Strategy", "UX Design", "CMS Development", "DMDesk"]
