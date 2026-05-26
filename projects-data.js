@@ -235,10 +235,10 @@ const PROJECTS = [
     role: { it: "Product Manager — End to End", en: "Product Manager — End to End" },
     title: { it: "Progetto Oroscopo", en: "Horoscope Project" },
     shortDesc: {
-      it: "Da sezione inattiva a 26K pageviews annuali con click ratio del 58%.",
-      en: "From inactive section to 26K annual pageviews with 58% click ratio."
+      it: "Da sezione inattiva a 1.5M+ pageviews annuali con click ratio del 58%.",
+      en: "From inactive section to 1.5M+ annual pageviews with 58% click ratio."
     },
-    metric: { value: "26K", label: { it: "Pageviews", en: "Pageviews" } },
+    metric: { value: "1.5M+", label: { it: "Pageviews", en: "Pageviews" } },
     stats: [
       { value: "1.5M+", label: { it: "Pageviews", en: "Pageviews" } },
       { value: "58%", label: { it: "Click Ratio", en: "Click Ratio" } },
