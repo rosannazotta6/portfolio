@@ -231,14 +231,14 @@ function renderHero() {
     $("#hero-eyebrow").textContent = "Portfolio · 2026";
     $("#hero-name").innerHTML = `Ciao, sono Rosanna <em class="hero-wave">👋</em>`;
     $("#hero-role").textContent = "Digital Product Manager & Innovation Enthusiast";
-    $("#hero-intro").textContent = "Trasformo idee in prodotti digitali concreti. Tre anni dentro il publishing del Gruppo Monrif — gestione prodotto end-to-end, sviluppo web, analytics e strategie data-driven per massimizzare engagement e crescita.";
+    $("#hero-intro").textContent = "Trasformo idee in prodotti digitali concreti. Gestione prodotto end-to-end, sviluppo web, analytics e strategie data-driven per massimizzare engagement e crescita.";
     $("#hero-cta-talk").innerHTML = `Parliamone <span class="arr">→</span>`;
     $("#hero-cta-cv").innerHTML = `Scarica CV <span class="arr">↓</span>`;
   } else {
     $("#hero-eyebrow").textContent = "Portfolio · 2026";
     $("#hero-name").innerHTML = `Hi, I'm Rosanna <em class="hero-wave">👋</em>`;
     $("#hero-role").textContent = "Digital Product Manager & Innovation Enthusiast";
-    $("#hero-intro").textContent = "I turn ideas into concrete digital products. Three years inside Gruppo Monrif's digital publishing — end-to-end product management, web development, analytics and data-driven strategies to maximize engagement and growth.";
+    $("#hero-intro").textContent = "I turn ideas into concrete digital products. End-to-end product management, web development, analytics and data-driven strategies to maximize engagement and growth.";
     $("#hero-cta-talk").innerHTML = `Let's talk <span class="arr">→</span>`;
     $("#hero-cta-cv").innerHTML = `Download CV <span class="arr">↓</span>`;
   }
