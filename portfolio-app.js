@@ -19,7 +19,7 @@ const T = {
     nav: { about: "About", work: "Progetti", skills: "Skills", contact: "Contatti" },
     workEyebrow: "Selezione · 17 progetti",
     workTitle: ["Il mio ", "lavoro", "."],
-    workDesc: "Tre anni nel publishing digitale del Gruppo Monrif. Sotto, i progetti raggruppati per ambito — clicca su una categoria per esplodere la lista, su un progetto per il case study completo.",
+    workDesc: "Sotto, i progetti a cui ho lavorato negli ultimi anni raggruppati per ambito — clicca su una categoria per esplodere la lista, su un progetto per il case study completo.",
     filterCat: "Categoria",
     filterTag: "Tag",
     all: "Tutti",
@@ -44,7 +44,7 @@ const T = {
     contactLead: "Sono sempre interessata a nuove opportunità nel Product Management, Digital Innovation e Media Technology.",
     aboutEyebrow: "Chi sono",
     aboutTitle: ["Trasformo idee in ", "prodotti", "."],
-    aboutP1: "Digital Product Manager Junior con <strong>3+ anni di esperienza</strong> nella gestione end-to-end di prodotti digitali per il settore media ed editoriale.",
+    aboutP1: "Digital Product Manager con 5 anni di esperienza in product development, digital marketing, CRM e growth in contesti digitali. Esperienza nella gestione end-to-end di prodotti ed iniziative digital, dalla definizione di roadmap e requisiti, al coordinamento cross-functional e al go-live. Competenze in UX/UI, analytics, A/B testing, email marketing, CRM e digital advertising, con approccio data-driven all’ottimizzazione di prodotto e performance.",
     aboutP2: "Appassionata di innovazione digitale, trasformo dati in decisioni strategiche e idee in prodotti scalabili. Ogni progetto parte da un'analisi approfondita e porta a risultati concreti.",
     based: "Base",
     available: "Disponibilità",
@@ -69,7 +69,7 @@ const T = {
     nav: { about: "About", work: "Work", skills: "Skills", contact: "Contact" },
     workEyebrow: "Selected · 17 projects",
     workTitle: ["My ", "work", "."],
-    workDesc: "Three years in digital publishing at Gruppo Monrif. Below, projects grouped by scope — click a category to expand the list, click a project for the full case study.",
+    workDesc: "Below, projects I've worked on during these years grouped by scope — click a category to expand the list, click a project for the full case study.",
     filterCat: "Category",
     filterTag: "Tag",
     all: "All",
@@ -94,7 +94,7 @@ const T = {
     contactLead: "Always interested in new opportunities in Product Management, Digital Innovation and Media Technology.",
     aboutEyebrow: "About me",
     aboutTitle: ["Turning ideas into ", "products", "."],
-    aboutP1: "Junior Digital Product Manager with <strong>3+ years of experience</strong> end-to-end managing digital products for the media and publishing industry.",
+    aboutP1: "Digital Product Manager with 5 years of experience in product development, digital marketing, CRM and growth within digital environments. End-to-end experience managing digital products and initiatives, from roadmap and requirements definition to cross-functional coordination and go-live. Skilled in UX/UI, analytics, A/B testing, email marketing, CRM and digital advertising, with a data-driven approach to product and performance optimization.",
     aboutP2: "Passionate about digital innovation, I turn data into strategy and ideas into scalable products. Every project starts with deep analysis and lands on concrete results.",
     based: "Based in",
     available: "Availability",
@@ -230,14 +230,14 @@ function renderHero() {
   if (lang === "it") {
     $("#hero-eyebrow").textContent = "Portfolio · 2026";
     $("#hero-name").innerHTML = `Ciao, sono Rosanna <em class="hero-wave">👋</em>`;
-    $("#hero-role").textContent = "Digital Product Manager Junior & Innovation Enthusiast";
+    $("#hero-role").textContent = "Digital Product Manager & Innovation Enthusiast";
     $("#hero-intro").textContent = "Trasformo idee in prodotti digitali concreti. Tre anni dentro il publishing del Gruppo Monrif — gestione prodotto end-to-end, sviluppo web, analytics e strategie data-driven per massimizzare engagement e crescita.";
     $("#hero-cta-talk").innerHTML = `Parliamone <span class="arr">→</span>`;
     $("#hero-cta-cv").innerHTML = `Scarica CV <span class="arr">↓</span>`;
   } else {
     $("#hero-eyebrow").textContent = "Portfolio · 2026";
     $("#hero-name").innerHTML = `Hi, I'm Rosanna <em class="hero-wave">👋</em>`;
-    $("#hero-role").textContent = "Junior Digital Product Manager & Innovation Enthusiast";
+    $("#hero-role").textContent = "Digital Product Manager & Innovation Enthusiast";
     $("#hero-intro").textContent = "I turn ideas into concrete digital products. Three years inside Gruppo Monrif's digital publishing — end-to-end product management, web development, analytics and data-driven strategies to maximize engagement and growth.";
     $("#hero-cta-talk").innerHTML = `Let's talk <span class="arr">→</span>`;
     $("#hero-cta-cv").innerHTML = `Download CV <span class="arr">↓</span>`;
